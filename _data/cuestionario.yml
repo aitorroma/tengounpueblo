@@ -18,46 +18,6 @@ final_titulo: ¡Ya lo tenemos!
 final_texto: Revisa el resumen y envíanoslo. Te contestaremos lo antes posible.
 
 preguntas:
-  # ── Para qué es ──
-  - id: motivo
-    seccion: Para qué es
-    etiqueta: Motivo
-    pregunta: ¿Para qué quieres la canción?
-    tipo: opciones
-    obligatoria: true
-    opciones:
-      - Himno o canción del pueblo
-      - Fiestas mayores o patronales
-      - Una peña o asociación
-      - Un regalo para alguien
-      - Promoción del pueblo o turismo
-      - Otra cosa
-
-  - id: motivo_otro
-    seccion: Para qué es
-    etiqueta: Motivo (detalle)
-    pregunta: Cuéntanos para qué es la canción
-    ayuda: "Ej.: una boda en el pueblo, el aniversario del club de fútbol, una despedida…"
-    tipo: parrafo
-    obligatoria: true
-    si: { id: motivo, es: "Otra cosa" }
-
-  - id: pena_nombre
-    seccion: Para qué es
-    etiqueta: Peña o asociación
-    pregunta: ¿Cómo se llama la peña o asociación?
-    ayuda: Si tiene lema, colores o una historia curiosa, cuéntalo también.
-    tipo: parrafo
-    si: { id: motivo, es: "Una peña o asociación" }
-
-  - id: regalo_para
-    seccion: Para qué es
-    etiqueta: Regalo para
-    pregunta: ¿Para quién es el regalo y qué relación tiene con el pueblo?
-    ayuda: "Ej.: para mi abuela, que nació allí y vive en Barcelona desde los 60."
-    tipo: parrafo
-    si: { id: motivo, es: "Un regalo para alguien" }
-
   # ── El pueblo ──
   - id: pueblo
     seccion: El pueblo
@@ -231,9 +191,6 @@ prompt_estilo_extra: "catchy sing-along chorus, high quality production"
 prompt_letra: |
   Escribe la letra de una canción original sobre el pueblo de {pueblo}.
   Está en {provincia}.
-  Motivo de la canción: {motivo}.
-  Peña o asociación: {pena_nombre}.
-  Es un regalo para: {regalo_para}.
   Idioma de la letra: {idioma}.
   Estilo musical: {estilo}.
   Referencias: {referencias}.

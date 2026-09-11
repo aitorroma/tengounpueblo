@@ -57,7 +57,7 @@ Haz `git push` y en uno o dos minutos está publicado.
 
 ## Cuestionario para crear canciones
 
-`tengounpueblo.com/cuestionario/` hace preguntas una a una para recoger el contexto de la canción: para qué es, lugares, fiestas, comida, personajes, expresiones, idioma, estilo, voz… Algunas preguntas solo aparecen según lo que se responda (por ejemplo, el nombre de la peña). Las respuestas se guardan en el navegador, así que se puede dejar a medias y seguir más tarde.
+`tengounpueblo.com/cuestionario/` hace preguntas una a una, solo sobre el pueblo, para recoger el contexto de su canción: nombre, lugares, fiestas, comida, personajes, expresiones, idioma, estilo, voz… Las respuestas se guardan en el navegador, así que se puede dejar a medias y seguir más tarde.
 
 Al terminar, se ve un resumen que se envía por WhatsApp (si configuras `whatsapp`), por email o con Formspree (si configuras `formspree`).
 
