@@ -66,7 +66,12 @@ layout: default
         {%- endif %}
       </div>
 
-      {%- if n_anunciantes > 0 %}
+      {%- if site.anuncios_api and site.anuncios_api != "" %}
+      <aside class="anunciantes" data-api="{{ site.anuncios_api }}" data-pueblo="{{ page.slug }}" data-por-vista="{{ site.anuncios_por_vista | default: 0 }}" hidden>
+        <span class="patrocinio-etiqueta">Con el apoyo de</span>
+        <ul class="anunciantes-lista"></ul>
+      </aside>
+      {%- elsif n_anunciantes > 0 %}
       <aside class="anunciantes">
         <span class="patrocinio-etiqueta">Con el apoyo de</span>
         <ul class="anunciantes-lista" data-por-vista="{{ site.anuncios_por_vista | default: 0 }}">

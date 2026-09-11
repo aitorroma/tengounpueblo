@@ -90,6 +90,12 @@ Un negocio paga `precio_patrocinio` (50 €) **por anuncio**: su anuncio se ve e
 - **Rotación:** en cada recarga los anuncios cambian de orden. Con `anuncios_por_vista` en `_config.yml` decides cuántos se ven a la vez: `0` = todos (solo cambia el orden), `1` = uno distinto en cada visita, `2` = dos, etc. El enlace lleva `rel="sponsored"`, como pide Google para los enlaces pagados.
 - **Cuando termine el año:** borra el bloque o renueva.
 
+## Servicio de anuncios (opcional)
+
+La carpeta `anuncios/` contiene un servicio en Go para alojar en tu propio servidor. Tiene un panel para crear anuncios, asociarlos a pueblos, ponerles fechas y ver sus impresiones y clics.
+
+Cuando esté desplegado, pon su dirección en `anuncios_api` (en `_config.yml`) y las fichas pasarán a mostrar sus anuncios en vez de los `patrocinadores` del `.md`. Instrucciones en [`anuncios/README.md`](anuncios/README.md).
+
 ## Monetización
 
 Todo se configura en `_config.yml`:

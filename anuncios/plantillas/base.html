@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{{block "titulo" .}}Anuncios{{end}} · tengounpueblo</title>
+  <link rel="stylesheet" href="/admin/estaticos/admin.css">
+  <script defer src="/admin/estaticos/admin.js"></script>
+</head>
+<body>
+  <header class="barra">
+    <a class="marca" href="/admin/"><b>tengoun</b><i>pueblo</i> <span>· anuncios</span></a>
+    <a class="btn" href="/admin/anuncios/nuevo">+ Nuevo anuncio</a>
+  </header>
+  <main class="contenedor">
+    {{with .Mensaje}}<p class="aviso aviso-ok" role="status">{{.}}</p>{{end}}
+    {{if .AvisoPueblos}}<p class="aviso aviso-alerta">No se ha podido leer la lista de pueblos de la web. Los nombres pueden salir incompletos.</p>{{end}}
+    {{block "contenido" .}}{{end}}
+  </main>
+</body>
+</html>

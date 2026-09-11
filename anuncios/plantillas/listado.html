@@ -1,0 +1,49 @@
+{{define "titulo"}}Anuncios{{end}}
+
+{{define "contenido"}}
+<h1>Anuncios</h1>
+
+<div class="resumen">
+  <div><strong>{{.Resumen.Activos}}</strong><span>activos</span></div>
+  <div><strong>{{.Resumen.CaducanPronto}}</strong><span>caducan en 30 días</span></div>
+  <div><strong>{{miles .Resumen.Impresiones}}</strong><span>impresiones</span></div>
+  <div><strong>{{miles .Resumen.Clics}}</strong><span>clics</span></div>
+</div>
+
+{{if .Filas}}
+<div class="tabla-scroll">
+  <table>
+    <thead>
+      <tr>
+        <th>Anunciante</th><th>Pueblos</th><th>Periodo</th><th>Estado</th>
+        <th class="num">Impresiones</th><th class="num">Clics</th><th class="num">CTR</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{range .Filas}}
+      <tr>
+        <td>
+          <a class="anunciante" href="/admin/anuncios/{{.ID}}">
+            {{if .Logo}}<img src="/logos/{{.Logo}}" alt="" width="36" height="36">{{else}}<span class="sin-logo">{{inicial .Nombre}}</span>{{end}}
+            <span><strong>{{.Nombre}}</strong>{{with .Texto}}<small>{{.}}</small>{{end}}</span>
+          </a>
+        </td>
+        <td>{{range $i, $p := .NombresPueblos}}{{if $i}}, {{end}}{{$p}}{{end}}</td>
+        <td class="fechas">{{fecha .Inicio}} – {{fecha .Fin}}{{if .CaducaPronto}}<small class="alerta">Caduca pronto</small>{{end}}</td>
+        <td><span class="estado estado-{{minusculas .Estado}}">{{.Estado}}</span></td>
+        <td class="num">{{miles .Impresiones}}</td>
+        <td class="num">{{miles .Clics}}</td>
+        <td class="num">{{ctr .Impresiones .Clics}}</td>
+      </tr>
+      {{end}}
+    </tbody>
+  </table>
+</div>
+{{else}}
+<div class="vacio">
+  <h2>Todavía no hay anuncios</h2>
+  <p>Crea el primero y asócialo a uno o varios pueblos.</p>
+  <a class="btn" href="/admin/anuncios/nuevo">Crear anuncio</a>
+</div>
+{{end}}
+{{end}}

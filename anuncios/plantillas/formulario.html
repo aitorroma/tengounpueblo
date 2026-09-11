@@ -1,0 +1,107 @@
+{{define "titulo"}}{{if .Anuncio.ID}}{{.Anuncio.Nombre}}{{else}}Nuevo anuncio{{end}}{{end}}
+
+{{define "contenido"}}
+{{$a := .Anuncio}}
+<p class="migas"><a href="/admin/">← Anuncios</a></p>
+<h1>{{if $a.ID}}Editar anuncio{{else}}Nuevo anuncio{{end}}</h1>
+
+{{with .Errores}}
+<div class="aviso aviso-error" role="alert">
+  <strong>Revisa el formulario:</strong>
+  <ul>{{range .}}<li>{{.}}</li>{{end}}</ul>
+</div>
+{{end}}
+
+<form class="formulario" method="post" action="/admin/anuncios{{if $a.ID}}/{{$a.ID}}{{end}}" enctype="multipart/form-data">
+  <input type="hidden" name="csrf" value="{{.CSRF}}">
+  <div class="columnas">
+    <section class="tarjeta">
+      <h2>Anunciante</h2>
+      <label>Nombre
+        <input name="nombre" value="{{$a.Nombre}}" maxlength="80" required>
+      </label>
+      <label>Frase corta <small>(opcional)</small>
+        <input name="texto" value="{{$a.Texto}}" maxlength="120" placeholder="Tapas y vermut desde 1985">
+      </label>
+      <label>Enlace <small>(web, Instagram o Google Maps)</small>
+        <input name="url" type="text" inputmode="url" value="{{$a.URL}}" placeholder="https://www.instagram.com/tunegocio">
+      </label>
+      <div class="logo-campo">
+        {{if $a.Logo}}<img src="/logos/{{$a.Logo}}" alt="Logo actual" width="72" height="72">{{end}}
+        <div>
+          <label>Logo <small>(PNG, JPG, WebP o GIF · máx. 2 MB · mejor cuadrado)</small>
+            <input type="file" name="logo" accept="image/png,image/jpeg,image/webp,image/gif">
+          </label>
+          {{if $a.Logo}}<label class="check"><input type="checkbox" name="quitar_logo" value="1"> Quitar el logo actual</label>{{end}}
+        </div>
+      </div>
+      <label>Notas internas <small>(no se publican: contacto, importe, factura…)</small>
+        <textarea name="notas" rows="3" maxlength="2000">{{$a.Notas}}</textarea>
+      </label>
+    </section>
+
+    <section class="tarjeta">
+      <h2>Periodo</h2>
+      <div class="fila">
+        <label>Desde <input type="date" name="inicio" value="{{$a.Inicio}}" required></label>
+        <label>Hasta <input type="date" name="fin" value="{{$a.Fin}}" required></label>
+      </div>
+      <label class="check"><input type="checkbox" name="activo" value="1"{{if $a.Activo}} checked{{end}}> Activo <small>(desmárcalo para pausarlo sin borrarlo)</small></label>
+
+      <h2>Pueblos</h2>
+      <input type="search" class="filtro" placeholder="Filtrar pueblos…" aria-label="Filtrar pueblos" data-filtro="#lista-pueblos">
+      <div class="pueblos" id="lista-pueblos">
+        {{range .Pueblos}}
+        <label class="check"><input type="checkbox" name="pueblos" value="{{.Slug}}"{{if contiene $a.Pueblos .Slug}} checked{{end}}> {{.Nombre}}{{with .Provincia}} <small>{{.}}</small>{{end}}</label>
+        {{else}}
+        <p class="ayuda">No hay pueblos. Revisa que la web publique pueblos.json.</p>
+        {{end}}
+      </div>
+    </section>
+  </div>
+
+  <div class="acciones">
+    <button class="btn" type="submit">Guardar anuncio</button>
+    <a class="btn btn-borde" href="/admin/">Cancelar</a>
+  </div>
+</form>
+
+{{if $a.ID}}
+<section class="tarjeta">
+  <h2>Estadísticas</h2>
+  <div class="resumen">
+    <div><strong>{{miles $a.Impresiones}}</strong><span>impresiones</span></div>
+    <div><strong>{{miles $a.Clics}}</strong><span>clics</span></div>
+    <div><strong>{{ctr $a.Impresiones $a.Clics}}</strong><span>CTR</span></div>
+  </div>
+  {{if .PorPueblo}}
+  <h3>Por pueblo</h3>
+  <div class="tabla-scroll">
+    <table>
+      <thead><tr><th>Pueblo</th><th class="num">Impresiones</th><th class="num">Clics</th><th class="num">CTR</th></tr></thead>
+      <tbody>
+        {{range .PorPueblo}}<tr><td>{{or (index $.Nombres .Clave) .Clave}}</td><td class="num">{{miles .Impresiones}}</td><td class="num">{{miles .Clics}}</td><td class="num">{{ctr .Impresiones .Clics}}</td></tr>{{end}}
+      </tbody>
+    </table>
+  </div>
+  {{end}}
+  {{if .PorDia}}
+  <h3>Últimos 30 días</h3>
+  <div class="tabla-scroll">
+    <table>
+      <thead><tr><th>Día</th><th class="num">Impresiones</th><th class="num">Clics</th></tr></thead>
+      <tbody>
+        {{range .PorDia}}<tr><td>{{fecha .Clave}}</td><td class="num">{{miles .Impresiones}}</td><td class="num">{{miles .Clics}}</td></tr>{{end}}
+      </tbody>
+    </table>
+  </div>
+  {{end}}
+  {{if not .PorPueblo}}<p class="ayuda">Todavía no se ha mostrado en ningún pueblo.</p>{{end}}
+</section>
+
+<form class="zona-peligro" method="post" action="/admin/anuncios/{{$a.ID}}/borrar" data-confirmar="¿Borrar el anuncio de {{$a.Nombre}}? Se perderán sus estadísticas.">
+  <input type="hidden" name="csrf" value="{{.CSRF}}">
+  <button class="btn btn-peligro" type="submit">Borrar anuncio</button>
+</form>
+{{end}}
+{{end}}

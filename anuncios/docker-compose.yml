@@ -1,0 +1,18 @@
+services:
+  anuncios:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:8080"   # solo accesible desde el proxy (Caddy, Nginx…)
+    environment:
+      PUBLIC_URL: https://anuncios.tengounpueblo.com
+      SITE_URL: https://tengounpueblo.com
+      ALLOWED_ORIGINS: https://tengounpueblo.com
+      ADMIN_USER: aitor
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Crea un archivo .env con ADMIN_PASSWORD=...}
+      TRUST_PROXY: "1"
+    volumes:
+      - datos:/data
+
+volumes:
+  datos:

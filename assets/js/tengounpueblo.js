@@ -198,6 +198,27 @@
     });
   }
 
+  // Anuncios del servicio propio (carpeta anuncios/): llegan ya rotados y el servicio cuenta impresiones y clics.
+  function anunciosRemotos(caja) {
+    const api = caja.dataset.api.replace(/\/+$/, '') + '/api/anuncios?pueblo=' +
+      encodeURIComponent(caja.dataset.pueblo) + '&n=' + (parseInt(caja.dataset.porVista, 10) || 0);
+    fetch(api, { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status))))
+      .then((datos) => {
+        const anuncios = (datos && datos.anuncios) || [];
+        if (!anuncios.length) return;
+        caja.querySelector('.anunciantes-lista').innerHTML = anuncios.map((an) => {
+          const dentro = (an.logo ? '<img src="' + escapar(an.logo) + '" width="44" height="44" alt="" loading="lazy">' : '') +
+            '<span><strong>' + escapar(an.nombre) + '</strong>' + (an.texto ? '<small>' + escapar(an.texto) + '</small>' : '') + '</span>';
+          return '<li>' + (an.enlace
+            ? '<a class="patrocinio-marca" href="' + escapar(an.enlace) + '" target="_blank" rel="sponsored noopener">' + dentro + '</a>'
+            : '<div class="patrocinio-marca">' + dentro + '</div>') + '</li>';
+        }).join('');
+        caja.hidden = false;
+      })
+      .catch(() => {});
+  }
+
   // Las letras largas se muestran plegadas con un botón para verlas enteras.
   function plegarLetra(letra) {
     if (letra.scrollHeight < 900) return;
@@ -221,7 +242,8 @@
   if ($('#cercanos')) cercanos($('#cercanos'));
   if ($('.compartir')) compartir($('.compartir'));
   if ($('.letra')) plegarLetra($('.letra'));
-  if ($('.anunciantes-lista')) rotarAnuncios($('.anunciantes-lista'));
+  if ($('.anunciantes[data-api]')) anunciosRemotos($('.anunciantes[data-api]'));
+  else if ($('.anunciantes-lista')) rotarAnuncios($('.anunciantes-lista'));
 
   window.TengoUnPueblo = { cargarPueblos, normalizar };
 })();
