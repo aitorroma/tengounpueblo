@@ -4,7 +4,7 @@ title: Anúnciate en la canción de tu pueblo
 description: Pon el anuncio de tu negocio en la página de la canción de tu pueblo. Tu logo, tu nombre y tu enlace durante un año.
 permalink: /patrocina/
 ---
-<section class="pagina estrecho" id="patrocina" data-email="{{ site.email_patrocinios | default: site.email }}" data-whatsapp="{{ site.whatsapp }}">
+<section class="pagina estrecho" id="patrocina" data-email="{{ site.email }}" data-whatsapp="{{ site.whatsapp }}">
   <p class="antetitulo">Para negocios locales</p>
   <h1>Anúnciate en la canción <span data-pueblo-texto>de tu pueblo</span></h1>
   <p class="entradilla">Pon tu bar, tu tienda o tu empresa en la página de la canción que el pueblo comparte por WhatsApp, pone en las fiestas y escucha con orgullo.</p>
@@ -29,7 +29,7 @@ permalink: /patrocina/
   </ol>
 
   <div class="acciones">
-    <a class="btn" data-contacto="email" href="mailto:{{ site.email_patrocinios | default: site.email }}?subject=Anuncio%20en%20una%20canci%C3%B3n">Quiero anunciarme</a>
+    <a class="btn" data-contacto="email" href="mailto:{{ site.email }}?subject=Anuncio%20en%20una%20canci%C3%B3n">Quiero anunciarme</a>
     {%- if site.whatsapp != "" %}
     <a class="btn btn-whatsapp" data-contacto="whatsapp" href="https://wa.me/{{ site.whatsapp }}?text=Hola%2C%20quiero%20poner%20un%20anuncio%20en%20una%20canci%C3%B3n" target="_blank" rel="noopener">WhatsApp</a>
     {%- endif %}

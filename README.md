@@ -71,7 +71,7 @@ Al terminar, se ve un resumen que se envía por WhatsApp (si configuras `whatsap
 
 ## Patrocinio de canciones
 
-Un negocio paga `precio_patrocinio` (50 €) **por anuncio**: su anuncio se ve en la página de la canción del pueblo durante `patrocinio_duracion` (1 año). Los dos valores se cambian en `_config.yml`, y las peticiones llegan a `email_patrocinios`.
+Un negocio paga `precio_patrocinio` (50 €) **por anuncio**: su anuncio se ve en la página de la canción del pueblo durante `patrocinio_duracion` (1 año). Los dos valores se cambian en `_config.yml`, y las peticiones llegan a `email`.
 
 - **Cada canción puede tener varios anunciantes.** Todas las fichas muestran «¿Tienes un negocio en…? 50 € por anuncio», que lleva a `/patrocina/?pueblo=…`. Esa página explica lo que incluye y abre el email o el WhatsApp con el pueblo ya escrito.
 - **Para añadir anunciantes:**
