@@ -86,7 +86,8 @@ Un negocio paga `precio_patrocinio` (50 €) **por anuncio**: su anuncio se ve e
        - nombre: "Forn de pa Cal Josep"
          url: "https://maps.google.com/..."
      ```
-  3. Aparecen bajo el reproductor («Con el apoyo de»), en el globo del mapa y en la tarjeta de la portada. El enlace lleva `rel="sponsored"`, como pide Google para los enlaces pagados.
+  3. Aparecen bajo el reproductor («Con el apoyo de»), en el globo del mapa y en la tarjeta de la portada.
+- **Rotación:** en cada recarga los anuncios cambian de orden. Con `anuncios_por_vista` en `_config.yml` decides cuántos se ven a la vez: `0` = todos (solo cambia el orden), `1` = uno distinto en cada visita, `2` = dos, etc. El enlace lleva `rel="sponsored"`, como pide Google para los enlaces pagados.
 - **Cuando termine el año:** borra el bloque o renueva.
 
 ## Monetización

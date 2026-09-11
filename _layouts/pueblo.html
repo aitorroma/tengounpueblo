@@ -69,7 +69,7 @@ layout: default
       {%- if n_anunciantes > 0 %}
       <aside class="anunciantes">
         <span class="patrocinio-etiqueta">Con el apoyo de</span>
-        <ul class="anunciantes-lista">
+        <ul class="anunciantes-lista" data-por-vista="{{ site.anuncios_por_vista | default: 0 }}">
           {%- for pat in page.patrocinadores %}
           {%- if pat.nombre and pat.nombre != "" %}
           <li>

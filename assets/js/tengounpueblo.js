@@ -184,6 +184,20 @@
     });
   }
 
+  // Anunciantes: orden aleatorio en cada visita y, si se configura, solo unos pocos a la vez.
+  function rotarAnuncios(lista) {
+    const anuncios = Array.from(lista.children);
+    for (let i = anuncios.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [anuncios[i], anuncios[j]] = [anuncios[j], anuncios[i]];
+    }
+    const porVista = parseInt(lista.dataset.porVista, 10) || 0;
+    anuncios.forEach((li, i) => {
+      li.hidden = porVista > 0 && i >= porVista;
+      lista.appendChild(li);
+    });
+  }
+
   // Las letras largas se muestran plegadas con un botón para verlas enteras.
   function plegarLetra(letra) {
     if (letra.scrollHeight < 900) return;
@@ -207,6 +221,7 @@
   if ($('#cercanos')) cercanos($('#cercanos'));
   if ($('.compartir')) compartir($('.compartir'));
   if ($('.letra')) plegarLetra($('.letra'));
+  if ($('.anunciantes-lista')) rotarAnuncios($('.anunciantes-lista'));
 
   window.TengoUnPueblo = { cargarPueblos, normalizar };
 })();
