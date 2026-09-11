@@ -355,7 +355,8 @@ h2 small { font-size: .55em; color: var(--suave); font-weight: 500; vertical-ali
 .pueblo-lateral .anuncio { margin: 0; }
 
 /* ─── Patrocinio ─── */
-.patrocinio { margin-top: 16px; text-align: center; }
+.anunciantes { margin-top: 16px; text-align: center; }
+.anunciantes-lista { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 0; padding: 0; list-style: none; }
 .patrocinio-etiqueta { display: block; margin-bottom: 6px; color: var(--suave); font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
 .patrocinio-marca {
   display: inline-flex; align-items: center; gap: 12px;

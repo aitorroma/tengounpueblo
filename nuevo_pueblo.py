@@ -90,12 +90,14 @@ youtube: {texto_yaml(args.youtube)}
 apple_music: ""
 amazon_music: ""
 
-# Patrocinio (opcional): quita los # para activarlo
-# patrocinador:
-#   nombre: "Bar de la Plaza"
-#   url: "https://..."                                   # web, Instagram o Google Maps
-#   logo: "/assets/img/patrocinadores/bar-de-la-plaza.png"  # cuadrado, fondo claro
-#   texto: "Tapas y vermut desde 1985"
+# Anunciantes (opcional, puede haber varios): quita los # para activarlo
+# patrocinadores:
+#   - nombre: "Bar de la Plaza"
+#     url: "https://..."                                     # web, Instagram o Google Maps
+#     logo: "/assets/img/patrocinadores/bar-de-la-plaza.png"    # cuadrado, fondo claro
+#     texto: "Tapas y vermut desde 1985"
+#   - nombre: "Forn de pa Cal Josep"
+#     url: "https://..."
 
 date: {date.today().isoformat()}
 description: ""   # opcional: frase para Google y al compartir en redes

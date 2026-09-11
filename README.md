@@ -73,18 +73,20 @@ Al terminar, se ve un resumen que se envía por WhatsApp (si configuras `whatsap
 
 Un negocio paga `precio_patrocinio` (50 €) **por anuncio**: su anuncio se ve en la página de la canción del pueblo durante `patrocinio_duracion` (1 año). Los dos valores se cambian en `_config.yml`, y las peticiones llegan a `email_patrocinios`.
 
-- **Fichas sin anunciante:** muestran «¿Tienes un negocio en…? 50 € por anuncio», que lleva a `/patrocina/?pueblo=…`. Esa página explica lo que incluye y abre el email o el WhatsApp con el pueblo ya escrito.
-- **Para activar un patrocinio:**
+- **Cada canción puede tener varios anunciantes.** Todas las fichas muestran «¿Tienes un negocio en…? 50 € por anuncio», que lleva a `/patrocina/?pueblo=…`. Esa página explica lo que incluye y abre el email o el WhatsApp con el pueblo ya escrito.
+- **Para añadir anunciantes:**
   1. Guarda su logo en `assets/img/patrocinadores/`.
-  2. En la ficha del pueblo, quita los `#` del bloque `patrocinador` y rellénalo:
+  2. En la ficha del pueblo, quita los `#` del bloque `patrocinadores` y añade uno por cada negocio (cada uno empieza con `- nombre:`):
      ```yaml
-     patrocinador:
-       nombre: "Bar de la Plaza"
-       url: "https://www.instagram.com/bardelaplaza"
-       logo: "/assets/img/patrocinadores/bar-de-la-plaza.png"
-       texto: "Tapas y vermut desde 1985"
+     patrocinadores:
+       - nombre: "Bar de la Plaza"
+         url: "https://www.instagram.com/bardelaplaza"
+         logo: "/assets/img/patrocinadores/bar-de-la-plaza.png"
+         texto: "Tapas y vermut desde 1985"
+       - nombre: "Forn de pa Cal Josep"
+         url: "https://maps.google.com/..."
      ```
-  3. Aparece bajo el reproductor («Canción patrocinada por»), en el globo del mapa y en la tarjeta de la portada. El enlace lleva `rel="sponsored"`, como pide Google para los enlaces pagados.
+  3. Aparecen bajo el reproductor («Con el apoyo de»), en el globo del mapa y en la tarjeta de la portada. El enlace lleva `rel="sponsored"`, como pide Google para los enlaces pagados.
 - **Cuando termine el año:** borra el bloque o renueva.
 
 ## Monetización

@@ -5,9 +5,8 @@ layout: default
 {%- if page.spotify and page.spotify != "" -%}{%- assign tiene_spotify = true -%}{%- endif -%}
 {%- assign tiene_youtube = false -%}
 {%- if page.youtube and page.youtube != "" -%}{%- assign tiene_youtube = true -%}{%- endif -%}
-{%- assign pat = page.patrocinador -%}
-{%- assign patrocinado = false -%}
-{%- if pat and pat.nombre and pat.nombre != "" -%}{%- assign patrocinado = true -%}{%- endif -%}
+{%- assign n_anunciantes = 0 -%}
+{%- if page.patrocinadores.first.nombre -%}{%- assign n_anunciantes = page.patrocinadores.size -%}{%- endif -%}
 {%- capture nl %}
 {% endcapture -%}
 {%- assign separador = nl | append: nl -%}
@@ -67,21 +66,21 @@ layout: default
         {%- endif %}
       </div>
 
-      {%- if patrocinado %}
-      <aside class="patrocinio">
-        <span class="patrocinio-etiqueta">Canción patrocinada por</span>
-        {%- if pat.url and pat.url != "" %}
-        <a class="patrocinio-marca" href="{{ pat.url }}" target="_blank" rel="sponsored noopener">
-        {%- else %}
-        <div class="patrocinio-marca">
-        {%- endif %}
-          {%- if pat.logo and pat.logo != "" %}<img src="{{ pat.logo | relative_url }}" width="44" height="44" alt="" loading="lazy">{% endif %}
-          <span><strong>{{ pat.nombre }}</strong>{% if pat.texto and pat.texto != "" %}<small>{{ pat.texto }}</small>{% endif %}</span>
-        {%- if pat.url and pat.url != "" %}
-        </a>
-        {%- else %}
-        </div>
-        {%- endif %}
+      {%- if n_anunciantes > 0 %}
+      <aside class="anunciantes">
+        <span class="patrocinio-etiqueta">Con el apoyo de</span>
+        <ul class="anunciantes-lista">
+          {%- for pat in page.patrocinadores %}
+          {%- if pat.nombre and pat.nombre != "" %}
+          <li>
+            {%- if pat.url and pat.url != "" %}<a class="patrocinio-marca" href="{{ pat.url }}" target="_blank" rel="sponsored noopener">{% else %}<div class="patrocinio-marca">{% endif %}
+              {%- if pat.logo and pat.logo != "" %}<img src="{{ pat.logo | relative_url }}" width="44" height="44" alt="" loading="lazy">{% endif %}
+              <span><strong>{{ pat.nombre }}</strong>{% if pat.texto and pat.texto != "" %}<small>{{ pat.texto }}</small>{% endif %}</span>
+            {%- if pat.url and pat.url != "" %}</a>{% else %}</div>{% endif %}
+          </li>
+          {%- endif %}
+          {%- endfor %}
+        </ul>
       </aside>
       {%- endif %}
 
@@ -176,14 +175,12 @@ layout: default
         </dl>
       </section>
 
-      {%- unless patrocinado %}
       <section class="tarjeta-lateral patrocina-tarjeta">
         <p class="patrocina-precio">{{ site.precio_patrocinio }} por anuncio · {{ site.patrocinio_duracion }}</p>
         <h2>¿Tienes un negocio en {{ page.title }}?</h2>
-        <p>Pon tu anuncio en la página de {% if tiene_spotify %}esta canción{% else %}la canción de {{ page.title }}{% endif %}: tu logo, tu nombre y un enlace a tu web.</p>
+        <p>{% if n_anunciantes > 0 %}Súmate a los negocios que ya se anuncian en esta canción{% else %}Pon tu anuncio en la página de {% if tiene_spotify %}esta canción{% else %}la canción de {{ page.title }}{% endif %}{% endif %}: tu logo, tu nombre y un enlace a tu web.</p>
         <a class="btn" href="{{ '/patrocina/' | relative_url }}?pueblo={{ page.title | url_encode }}">Anúnciate aquí</a>
       </section>
-      {%- endunless %}
 
       {%- if page.lat and page.lng %}
       <section class="tarjeta-lateral" hidden>
@@ -209,7 +206,7 @@ layout: default
   "url": {{ page.url | absolute_url | jsonify }},
   "byArtist": { "@type": "MusicGroup", "name": {{ site.artista | jsonify }} },
   "contentLocation": { "@type": "Place", "name": {{ page.title | jsonify }}{% if page.lat and page.lng %}, "geo": { "@type": "GeoCoordinates", "latitude": {{ page.lat }}, "longitude": {{ page.lng }} }{% endif %} }{% if tiene_spotify %},
-  "sameAs": {{ page.spotify | jsonify }}{% endif %}{% if patrocinado %},
-  "sponsor": { "@type": "Organization", "name": {{ pat.nombre | jsonify }}{% if pat.url and pat.url != "" %}, "url": {{ pat.url | jsonify }}{% endif %} }{% endif %}
+  "sameAs": {{ page.spotify | jsonify }}{% endif %}{% if n_anunciantes > 0 %},
+  "sponsor": [{% for pat in page.patrocinadores %}{ "@type": "Organization", "name": {{ pat.nombre | jsonify }}{% if pat.url and pat.url != "" %}, "url": {{ pat.url | jsonify }}{% endif %} }{% unless forloop.last %}, {% endunless %}{% endfor %}]{% endif %}
 }
 </script>

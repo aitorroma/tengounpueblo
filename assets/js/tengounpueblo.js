@@ -75,7 +75,7 @@
         if (p.lat == null || p.lng == null) return;
         L.marker([p.lat, p.lng], { icon: icono(p.cancion), title: p.nombre })
           .bindPopup('<div class="popup"><strong>' + escapar(p.nombre) + '</strong><span>' + escapar(p.provincia) + '</span>' +
-            (p.patrocinador ? '<small class="popup-patrocinio">Con el patrocinio de ' + escapar(p.patrocinador) + '</small>' : '') +
+            ((p.patrocinadores || []).length ? '<small class="popup-patrocinio">Con el apoyo de ' + escapar(p.patrocinadores.join(', ')) + '</small>' : '') +
             '<a class="btn btn-peq" href="' + escapar(p.url) + '">' + (p.cancion ? 'Escuchar la canción' : 'Ver ficha') + '</a></div>')
           .addTo(grupo);
       });

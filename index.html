@@ -26,7 +26,7 @@ mapa: true
         <strong>{{ p.title }}</strong>
         <span>{{ p.provincia }}</span>
         {%- unless p.spotify and p.spotify != "" %}<em class="etiqueta">Próximamente</em>{% endunless %}
-        {%- if p.patrocinador.nombre and p.patrocinador.nombre != "" %}<em class="etiqueta etiqueta-patrocinio">Con {{ p.patrocinador.nombre }}</em>{% endif %}
+        {%- if p.patrocinadores.first.nombre %}<em class="etiqueta etiqueta-patrocinio">{% if p.patrocinadores.size == 1 %}Con {{ p.patrocinadores.first.nombre }}{% else %}{{ p.patrocinadores.size }} anunciantes{% endif %}</em>{% endif %}
       </a>
     </li>
     {%- endfor %}
