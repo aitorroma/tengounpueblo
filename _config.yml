@@ -19,8 +19,8 @@ precio_desde: ""      # p. ej. "49 €" (se muestra en /encarga/)
 formspree: ""         # id de formspree.io (p. ej. xyzabcd) para recibir el cuestionario por email sin que el cliente abra su correo
 
 # ─── Monetización y analítica ─────────────────────────────────────────
-precio_patrocinio: "50 €"       # lo que paga un negocio por patrocinar la canción de un pueblo
-patrocinio_duracion: "1 año"    # cuánto tiempo sale su marca en la ficha
+precio_patrocinio: "50 €"       # precio de un anuncio en la página de la canción de un pueblo
+patrocinio_duracion: "1 año"    # cuánto tiempo se ve el anuncio
 adsense_client: ""    # ca-pub-1234567890123456  (activa anuncios y ads.txt)
 adsense_slot: ""      # id del bloque de anuncio
 goatcounter: ""       # código de goatcounter.com (analítica gratis y sin cookies)

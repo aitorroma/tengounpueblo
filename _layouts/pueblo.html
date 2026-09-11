@@ -178,10 +178,10 @@ layout: default
 
       {%- unless patrocinado %}
       <section class="tarjeta-lateral patrocina-tarjeta">
-        <p class="patrocina-precio">{{ site.precio_patrocinio }} · {{ site.patrocinio_duracion }}</p>
+        <p class="patrocina-precio">{{ site.precio_patrocinio }} por anuncio · {{ site.patrocinio_duracion }}</p>
         <h2>¿Tienes un negocio en {{ page.title }}?</h2>
-        <p>{% if tiene_spotify %}Pon tu marca y tu enlace junto a esta canción.{% else %}Haz posible la canción de {{ page.title }} y sal en ella desde el primer día.{% endif %}</p>
-        <a class="btn" href="{{ '/patrocina/' | relative_url }}?pueblo={{ page.title | url_encode }}">Patrocinar</a>
+        <p>Pon tu anuncio en la página de {% if tiene_spotify %}esta canción{% else %}la canción de {{ page.title }}{% endif %}: tu logo, tu nombre y un enlace a tu web.</p>
+        <a class="btn" href="{{ '/patrocina/' | relative_url }}?pueblo={{ page.title | url_encode }}">Anúnciate aquí</a>
       </section>
       {%- endunless %}
 

@@ -1,38 +1,38 @@
 ---
 layout: default
-title: Patrocina la canción de tu pueblo
-description: Pon tu negocio en la canción que todo el pueblo comparte. Tu logo y tu enlace en la página de la canción.
+title: Anúnciate en la canción de tu pueblo
+description: Pon el anuncio de tu negocio en la página de la canción de tu pueblo. Tu logo, tu nombre y tu enlace durante un año.
 permalink: /patrocina/
 ---
 <section class="pagina estrecho" id="patrocina" data-email="{{ site.email_patrocinios | default: site.email }}" data-whatsapp="{{ site.whatsapp }}">
   <p class="antetitulo">Para negocios locales</p>
-  <h1>Patrocina la canción <span data-pueblo-texto>de tu pueblo</span></h1>
-  <p class="entradilla">Pon tu bar, tu tienda o tu empresa junto a la canción que el pueblo comparte por WhatsApp, pone en las fiestas y escucha con orgullo.</p>
+  <h1>Anúnciate en la canción <span data-pueblo-texto>de tu pueblo</span></h1>
+  <p class="entradilla">Pon tu bar, tu tienda o tu empresa en la página de la canción que el pueblo comparte por WhatsApp, pone en las fiestas y escucha con orgullo.</p>
 
   <div class="tarifa">
-    <p class="precio"><strong>{{ site.precio_patrocinio }}</strong> por canción · {{ site.patrocinio_duracion }}</p>
+    <p class="precio"><strong>{{ site.precio_patrocinio }}</strong> por anuncio · {{ site.patrocinio_duracion }}</p>
     <ul class="lista-check">
-      <li>Tu logo, nombre y enlace en la página de la canción</li>
+      <li>Tu anuncio en la página de la canción: logo, nombre, una frase y enlace a tu web, Instagram o Google Maps</li>
       <li>«Con el patrocinio de…» en el mapa y en el listado de pueblos</li>
       <li>Mención en la descripción del vídeo y en las publicaciones en redes</li>
       <li>Puedes poner la canción en tu local y usarla en tus redes</li>
     </ul>
   </div>
 
-  <p>¿El pueblo todavía no tiene canción? <strong>Tu patrocinio la hace posible:</strong> la creamos y sale con tu marca desde el primer día.</p>
+  <p>Tu anuncio sale en la página del pueblo que elijas, también si su canción todavía está en camino.</p>
   <p>¿Quieres que tu negocio salga <strong>en la letra</strong>? Pregúntanos.</p>
 
   <h2>Cómo funciona</h2>
   <ol class="pasos">
     <li><strong>Nos escribes</strong>Dinos tu negocio y el pueblo.</li>
     <li><strong>Nos mandas tu logo</strong>Y el enlace a tu web, Instagram o Google Maps.</li>
-    <li><strong>Publicado</strong>Tu marca aparece en la canción durante {{ site.patrocinio_duracion }}.</li>
+    <li><strong>Publicado</strong>Tu anuncio aparece en la página de la canción durante {{ site.patrocinio_duracion }}.</li>
   </ol>
 
   <div class="acciones">
-    <a class="btn" data-contacto="email" href="mailto:{{ site.email_patrocinios | default: site.email }}?subject=Patrocinio%20de%20una%20canci%C3%B3n">Quiero patrocinar</a>
+    <a class="btn" data-contacto="email" href="mailto:{{ site.email_patrocinios | default: site.email }}?subject=Anuncio%20en%20una%20canci%C3%B3n">Quiero anunciarme</a>
     {%- if site.whatsapp != "" %}
-    <a class="btn btn-whatsapp" data-contacto="whatsapp" href="https://wa.me/{{ site.whatsapp }}?text=Hola%2C%20quiero%20patrocinar%20una%20canci%C3%B3n" target="_blank" rel="noopener">WhatsApp</a>
+    <a class="btn btn-whatsapp" data-contacto="whatsapp" href="https://wa.me/{{ site.whatsapp }}?text=Hola%2C%20quiero%20poner%20un%20anuncio%20en%20una%20canci%C3%B3n" target="_blank" rel="noopener">WhatsApp</a>
     {%- endif %}
   </div>
 </section>
@@ -43,12 +43,12 @@ permalink: /patrocina/
     var pueblo = new URLSearchParams(location.search).get('pueblo');
     if (!pueblo) return;
     var caja = document.getElementById('patrocina');
-    var mensaje = 'Hola, quiero patrocinar la canción de ' + pueblo + '. Mi negocio es: ';
+    var mensaje = 'Hola, quiero poner un anuncio en la canción de ' + pueblo + '. Mi negocio es: ';
     document.querySelector('[data-pueblo-texto]').textContent = 'de ' + pueblo;
     document.querySelectorAll('[data-contacto]').forEach(function (a) {
       a.href = a.dataset.contacto === 'whatsapp'
         ? 'https://wa.me/' + caja.dataset.whatsapp + '?text=' + encodeURIComponent(mensaje)
-        : 'mailto:' + caja.dataset.email + '?subject=' + encodeURIComponent('Patrocinio: canción de ' + pueblo) + '&body=' + encodeURIComponent(mensaje);
+        : 'mailto:' + caja.dataset.email + '?subject=' + encodeURIComponent('Anuncio: canción de ' + pueblo) + '&body=' + encodeURIComponent(mensaje);
     });
   })();
 </script>

@@ -71,9 +71,9 @@ Al terminar, se ve un resumen que se envía por WhatsApp (si configuras `whatsap
 
 ## Patrocinio de canciones
 
-Un negocio del pueblo paga `precio_patrocinio` (50 €) para salir en la canción durante `patrocinio_duracion` (1 año). Los dos valores se cambian en `_config.yml`.
+Un negocio paga `precio_patrocinio` (50 €) **por anuncio**: su anuncio se ve en la página de la canción del pueblo durante `patrocinio_duracion` (1 año). Los dos valores se cambian en `_config.yml`, y las peticiones llegan a `email_patrocinios`.
 
-- **Fichas sin patrocinador:** muestran «¿Tienes un negocio en…? Patrocina esta canción», que lleva a `/patrocina/?pueblo=…`. Esa página explica lo que incluye y abre el email o el WhatsApp con el pueblo ya escrito.
+- **Fichas sin anunciante:** muestran «¿Tienes un negocio en…? 50 € por anuncio», que lleva a `/patrocina/?pueblo=…`. Esa página explica lo que incluye y abre el email o el WhatsApp con el pueblo ya escrito.
 - **Para activar un patrocinio:**
   1. Guarda su logo en `assets/img/patrocinadores/`.
   2. En la ficha del pueblo, quita los `#` del bloque `patrocinador` y rellénalo:
