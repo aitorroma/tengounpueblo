@@ -1,0 +1,21 @@
+---
+layout: default
+title: Cuéntanos cómo es tu pueblo
+description: Responde unas preguntas sobre tu pueblo y crearemos su canción.
+permalink: /cuestionario/
+---
+<section class="cuestionario estrecho" id="cuestionario"
+  data-email="{{ site.email }}"
+  data-whatsapp="{{ site.whatsapp }}"
+  data-formspree="{{ site.formspree }}">
+  <div class="progreso" hidden><span></span></div>
+  <div class="pantalla">
+    <noscript>
+      <h1>Cuéntanos cómo es tu pueblo</h1>
+      <p>Para usar el cuestionario necesitas JavaScript. También puedes escribirnos a <a href="mailto:{{ site.email }}">{{ site.email }}</a>.</p>
+    </noscript>
+  </div>
+</section>
+
+<script type="application/json" id="cuestionario-datos">{{ site.data.cuestionario | jsonify }}</script>
+<script defer src="{{ '/assets/js/cuestionario.js' | relative_url }}"></script>

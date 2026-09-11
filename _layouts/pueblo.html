@@ -1,0 +1,215 @@
+---
+layout: default
+---
+{%- assign tiene_spotify = false -%}
+{%- if page.spotify and page.spotify != "" -%}{%- assign tiene_spotify = true -%}{%- endif -%}
+{%- assign tiene_youtube = false -%}
+{%- if page.youtube and page.youtube != "" -%}{%- assign tiene_youtube = true -%}{%- endif -%}
+{%- assign pat = page.patrocinador -%}
+{%- assign patrocinado = false -%}
+{%- if pat and pat.nombre and pat.nombre != "" -%}{%- assign patrocinado = true -%}{%- endif -%}
+{%- capture nl %}
+{% endcapture -%}
+{%- assign separador = nl | append: nl -%}
+{%- assign texto = content | strip -%}
+{%- assign meses = "ene.,feb.,mar.,abr.,may.,jun.,jul.,ago.,sept.,oct.,nov.,dic." | split: "," -%}
+{%- capture plataformas -%}
+  {%- if tiene_spotify %}<a class="btn btn-spotify" href="{{ page.spotify }}" target="_blank" rel="noopener">{% include icono.html nombre="spotify" %}Escuchar en Spotify</a>{% endif -%}
+  {%- if tiene_youtube %}<a class="btn btn-youtube" href="{{ page.youtube }}" target="_blank" rel="noopener">{% include icono.html nombre="youtube" %}Ver en YouTube</a>{% endif -%}
+  {%- if page.apple_music and page.apple_music != "" %}<a class="btn btn-oscuro" href="{{ page.apple_music }}" target="_blank" rel="noopener">Apple Music</a>{% endif -%}
+  {%- if page.amazon_music and page.amazon_music != "" %}<a class="btn btn-oscuro" href="{{ page.amazon_music }}" target="_blank" rel="noopener">Amazon Music</a>{% endif -%}
+{%- endcapture -%}
+{%- assign plataformas = plataformas | strip -%}
+
+<article class="pueblo">
+  <header class="pueblo-hero">
+    <div class="contenedor">
+      <nav class="migas" aria-label="Estás en">
+        <a href="{{ '/' | relative_url }}#mapa">Mapa</a>
+        {%- if page.provincia and page.provincia != "" %}<span aria-hidden="true">›</span><span>{{ page.provincia }}</span>{% endif %}
+        <span aria-hidden="true">›</span><span aria-current="page">{{ page.title }}</span>
+      </nav>
+      <p class="antetitulo">La canción de</p>
+      <h1>{{ page.title }}</h1>
+      {%- if page.cancion and page.cancion != "" %}
+      <p class="titulo-cancion">«{{ page.cancion }}»</p>
+      {%- endif %}
+      <ul class="chips">
+        {%- if page.comarca and page.comarca != "" %}<li>{{ page.comarca }}</li>{% endif %}
+        {%- if page.provincia and page.provincia != "" %}<li>{{ page.provincia }}</li>{% endif %}
+        {%- if page.comunidad and page.comunidad != "" %}<li>{{ page.comunidad }}</li>{% endif %}
+      </ul>
+    </div>
+    <svg class="colinas" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true">
+      <path class="c1" d="M0 62C240 18 430 36 650 70S1110 26 1440 58V140H0Z"/>
+      <path class="c2" d="M0 100C260 58 520 78 770 98S1190 66 1440 92V140H0Z"/>
+      <path class="c3" d="M0 124C300 96 620 110 900 121S1260 104 1440 116V140H0Z"/>
+    </svg>
+  </header>
+
+  <div class="contenedor pueblo-grid">
+    <div class="pueblo-principal">
+      <div class="reproductor">
+        {%- if tiene_spotify %}
+          {% include spotify.html url=page.spotify %}
+        {%- else %}
+        <div class="proximamente">
+          <div class="en-estudio"><span class="ecualizador" aria-hidden="true"><i></i><i></i><i></i><i></i></span>En el estudio</div>
+          <h2>La canción de {{ page.title }} está en camino</h2>
+          <p>¿Eres de aquí? Cuéntanos sus rincones, fiestas y anécdotas y las meteremos en la letra.</p>
+          <div class="acciones">
+            <a class="btn" href="{{ '/cuestionario/' | relative_url }}?pueblo={{ page.title | url_encode }}&amp;provincia={{ page.provincia | url_encode }}">Cuéntanos cómo es</a>
+            {%- if site.spotify_artista != "" %}
+            <a class="btn btn-borde" href="{{ site.spotify_artista }}" target="_blank" rel="noopener">Seguir en Spotify</a>
+            {%- endif %}
+          </div>
+        </div>
+        {%- endif %}
+      </div>
+
+      {%- if patrocinado %}
+      <aside class="patrocinio">
+        <span class="patrocinio-etiqueta">Canción patrocinada por</span>
+        {%- if pat.url and pat.url != "" %}
+        <a class="patrocinio-marca" href="{{ pat.url }}" target="_blank" rel="sponsored noopener">
+        {%- else %}
+        <div class="patrocinio-marca">
+        {%- endif %}
+          {%- if pat.logo and pat.logo != "" %}<img src="{{ pat.logo | relative_url }}" width="44" height="44" alt="" loading="lazy">{% endif %}
+          <span><strong>{{ pat.nombre }}</strong>{% if pat.texto and pat.texto != "" %}<small>{{ pat.texto }}</small>{% endif %}</span>
+        {%- if pat.url and pat.url != "" %}
+        </a>
+        {%- else %}
+        </div>
+        {%- endif %}
+      </aside>
+      {%- endif %}
+
+      <div class="barra-escucha{% if plataformas == '' %} solo-compartir{% endif %}">
+        {%- if plataformas != "" %}
+        <div class="plataformas">{{ plataformas }}</div>
+        {%- endif %}
+        <div class="compartir" data-texto="Escucha la canción de {{ page.title }} 🎶">
+          <a class="btn btn-peq btn-whatsapp" data-compartir="whatsapp" href="#" target="_blank" rel="noopener">Enviar por WhatsApp</a>
+          <details class="mas-compartir">
+            <summary class="btn btn-peq btn-borde">Compartir</summary>
+            <div class="menu-compartir">
+              <a data-compartir="facebook" href="#" target="_blank" rel="noopener">Facebook</a>
+              <a data-compartir="x" href="#" target="_blank" rel="noopener">X (Twitter)</a>
+              <a data-compartir="copiar" href="#">Copiar enlace</a>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      {% include anuncio.html %}
+
+      {%- if tiene_youtube %}
+      <section class="bloque bloque-video">
+        <h2 class="titulo-icono">{% include icono.html nombre="youtube" %}Mírala en YouTube</h2>
+        {% include youtube.html url=page.youtube %}
+      </section>
+      {%- endif %}
+
+      {%- if texto != "" %}
+      <section class="bloque">
+        <h2>Sobre {{ page.title }}</h2>
+        <div class="contenido">{{ content }}</div>
+      </section>
+      {%- endif %}
+
+      {%- if page.letra and page.letra != "" %}
+      <section class="letra">
+        <h2>Letra</h2>
+        {%- comment %} Las etiquetas de Suno ([Verse], [Chorus]…) se muestran como títulos de sección. {% endcomment %}
+        {%- assign estrofas = page.letra | strip | split: separador %}
+        {%- assign seccion = "" %}
+        {%- for estrofa in estrofas %}
+          {%- assign cuerpo = estrofa | strip %}
+          {%- assign primera = cuerpo | split: nl | first %}
+          {%- assign inicial = primera | strip | slice: 0 %}
+          {%- if inicial == "[" %}
+            {%- assign crudo = primera | strip | remove_first: "[" | split: "]" | first | strip %}
+            {%- assign clave = crudo | downcase %}
+            {%- if clave contains "pre" and clave contains "chorus" %}{% assign seccion = "Preestribillo" %}
+            {%- elsif clave contains "final chorus" %}{% assign seccion = "Estribillo final" %}
+            {%- elsif clave contains "chorus" %}{% assign seccion = "Estribillo" %}
+            {%- elsif clave contains "verse" %}{% assign seccion = "Estrofa" %}
+            {%- elsif clave contains "bridge" %}{% assign seccion = "Puente" %}
+            {%- elsif clave contains "intro" %}{% assign seccion = "Intro" %}
+            {%- elsif clave contains "outro" %}{% assign seccion = "Final" %}
+            {%- else %}{% assign seccion = crudo | split: "–" | first | strip %}
+            {%- endif %}
+            {%- assign cuerpo = cuerpo | remove_first: primera | strip %}
+        <span class="letra-seccion">{{ seccion }}</span>
+          {%- endif %}
+          {%- if cuerpo != "" %}
+        <p{% if seccion == "Estribillo" or seccion == "Estribillo final" %} class="es-estribillo"{% endif %}>{{ cuerpo | escape | newline_to_br }}</p>
+          {%- endif %}
+        {%- endfor %}
+      </section>
+      {%- endif %}
+    </div>
+
+    <aside class="pueblo-lateral">
+      <section class="tarjeta-lateral">
+        <h2>{{ page.title }} en el mapa</h2>
+        {%- if page.lat and page.lng %}
+        <div class="minimapa" id="minimapa" data-lat="{{ page.lat }}" data-lng="{{ page.lng }}"></div>
+        {%- endif %}
+        <dl class="datos">
+          {%- if page.comarca and page.comarca != "" %}<div><dt>Comarca</dt><dd>{{ page.comarca }}</dd></div>{% endif %}
+          {%- if page.provincia and page.provincia != "" %}<div><dt>Provincia</dt><dd>{{ page.provincia }}</dd></div>{% endif %}
+          {%- if page.comunidad and page.comunidad != "" %}<div><dt>Comunidad</dt><dd>{{ page.comunidad }}</dd></div>{% endif %}
+          {%- if tiene_spotify or tiene_youtube %}
+          <div><dt>Escúchala en</dt><dd class="datos-plataformas">
+            {%- if tiene_spotify %}<a class="icono-plataforma icono-spotify" href="{{ page.spotify }}" target="_blank" rel="noopener" aria-label="Escuchar en Spotify" title="Spotify">{% include icono.html nombre="spotify" %}</a>{% endif %}
+            {%- if tiene_youtube %}<a class="icono-plataforma icono-youtube" href="{{ page.youtube }}" target="_blank" rel="noopener" aria-label="Ver en YouTube" title="YouTube">{% include icono.html nombre="youtube" %}</a>{% endif %}
+          </dd></div>
+          {%- endif %}
+          {%- if tiene_spotify and page.date %}
+          {%- assign mes = page.date | date: "%-m" | minus: 1 %}
+          <div><dt>Publicada</dt><dd><time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%-d" }} {{ meses[mes] }} {{ page.date | date: "%Y" }}</time></dd></div>
+          {%- else %}
+          <div><dt>Canción</dt><dd>{% if tiene_spotify %}Disponible{% else %}En composición{% endif %}</dd></div>
+          {%- endif %}
+        </dl>
+      </section>
+
+      {%- unless patrocinado %}
+      <section class="tarjeta-lateral patrocina-tarjeta">
+        <p class="patrocina-precio">{{ site.precio_patrocinio }} · {{ site.patrocinio_duracion }}</p>
+        <h2>¿Tienes un negocio en {{ page.title }}?</h2>
+        <p>{% if tiene_spotify %}Pon tu marca y tu enlace junto a esta canción.{% else %}Haz posible la canción de {{ page.title }} y sal en ella desde el primer día.{% endif %}</p>
+        <a class="btn" href="{{ '/patrocina/' | relative_url }}?pueblo={{ page.title | url_encode }}">Patrocinar</a>
+      </section>
+      {%- endunless %}
+
+      {%- if page.lat and page.lng %}
+      <section class="tarjeta-lateral" hidden>
+        <h2>Pueblos cercanos</h2>
+        <ul class="lista-cercanos" id="cercanos" data-lat="{{ page.lat }}" data-lng="{{ page.lng }}" data-url="{{ page.url | relative_url }}"></ul>
+      </section>
+      {%- endif %}
+
+      {% include anuncio.html %}
+    </aside>
+  </div>
+
+  <div class="contenedor">
+    {% include cta.html %}
+  </div>
+</article>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicRecording",
+  "name": {% if page.cancion and page.cancion != "" %}{{ page.cancion | jsonify }}{% else %}{{ page.title | prepend: "Canción de " | jsonify }}{% endif %},
+  "url": {{ page.url | absolute_url | jsonify }},
+  "byArtist": { "@type": "MusicGroup", "name": {{ site.artista | jsonify }} },
+  "contentLocation": { "@type": "Place", "name": {{ page.title | jsonify }}{% if page.lat and page.lng %}, "geo": { "@type": "GeoCoordinates", "latitude": {{ page.lat }}, "longitude": {{ page.lng }} }{% endif %} }{% if tiene_spotify %},
+  "sameAs": {{ page.spotify | jsonify }}{% endif %}{% if patrocinado %},
+  "sponsor": { "@type": "Organization", "name": {{ pat.nombre | jsonify }}{% if pat.url and pat.url != "" %}, "url": {{ pat.url | jsonify }}{% endif %} }{% endif %}
+}
+</script>

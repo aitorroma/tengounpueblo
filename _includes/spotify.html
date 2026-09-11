@@ -1,0 +1,7 @@
+{%- comment -%}
+  Acepta cualquier enlace de Spotify (canción, álbum o playlist), también con
+  /intl-es/ o ?si=..., y lo convierte en el reproductor incrustado.
+{%- endcomment -%}
+{%- assign partes = include.url | split: "?" | first | split: "/" -%}
+{%- assign n = partes.size | minus: 2 -%}
+<iframe src="https://open.spotify.com/embed/{{ partes[n] }}/{{ partes.last }}?utm_source=generator" width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Reproductor de Spotify"></iframe>

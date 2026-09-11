@@ -1,0 +1,257 @@
+# ─── Cuestionario para crear una canción ──────────────────────────────
+# Puedes añadir, quitar o reordenar preguntas. Cada pregunta tiene:
+#   id           nombre interno, sin espacios ni tildes (se usa en los prompts: {id})
+#   seccion      texto pequeño que aparece encima de la pregunta
+#   etiqueta     título corto que sale en el resumen que te envían
+#   pregunta     la pregunta
+#   ayuda        (opcional) ejemplos o aclaración
+#   tipo         texto | parrafo | opciones (elige una) | multiple (elige varias)
+#   obligatoria  (opcional) true si no se puede saltar
+#   opciones     para tipo opciones/multiple. Con "estilo" añades etiquetas (en inglés)
+#                al prompt de estilo musical para la IA
+#   si           (opcional) solo se pregunta si otra respuesta tiene ese valor
+
+antetitulo: Canción a medida
+titulo: Cuéntanos cómo es tu pueblo
+intro: Te haremos unas preguntas para que la canción suene a tu pueblo de verdad. Son unos minutos; puedes saltarte las que no sepas y tus respuestas se guardan en este navegador.
+final_titulo: ¡Ya lo tenemos!
+final_texto: Revisa el resumen y envíanoslo. Te contestaremos lo antes posible.
+
+preguntas:
+  # ── Para qué es ──
+  - id: motivo
+    seccion: Para qué es
+    etiqueta: Motivo
+    pregunta: ¿Para qué quieres la canción?
+    tipo: opciones
+    obligatoria: true
+    opciones:
+      - Himno o canción del pueblo
+      - Fiestas mayores o patronales
+      - Una peña o asociación
+      - Un regalo para alguien
+      - Promoción del pueblo o turismo
+      - Otra cosa
+
+  - id: motivo_otro
+    seccion: Para qué es
+    etiqueta: Motivo (detalle)
+    pregunta: Cuéntanos para qué es la canción
+    ayuda: "Ej.: una boda en el pueblo, el aniversario del club de fútbol, una despedida…"
+    tipo: parrafo
+    obligatoria: true
+    si: { id: motivo, es: "Otra cosa" }
+
+  - id: pena_nombre
+    seccion: Para qué es
+    etiqueta: Peña o asociación
+    pregunta: ¿Cómo se llama la peña o asociación?
+    ayuda: Si tiene lema, colores o una historia curiosa, cuéntalo también.
+    tipo: parrafo
+    si: { id: motivo, es: "Una peña o asociación" }
+
+  - id: regalo_para
+    seccion: Para qué es
+    etiqueta: Regalo para
+    pregunta: ¿Para quién es el regalo y qué relación tiene con el pueblo?
+    ayuda: "Ej.: para mi abuela, que nació allí y vive en Barcelona desde los 60."
+    tipo: parrafo
+    si: { id: motivo, es: "Un regalo para alguien" }
+
+  # ── El pueblo ──
+  - id: pueblo
+    seccion: El pueblo
+    etiqueta: Pueblo
+    pregunta: ¿Cómo se llama el pueblo?
+    tipo: texto
+    obligatoria: true
+    placeholder: "Ej.: Alfarràs"
+
+  - id: provincia
+    seccion: El pueblo
+    etiqueta: Provincia o comarca
+    pregunta: ¿En qué provincia o comarca está?
+    tipo: texto
+    placeholder: "Ej.: Segrià, Lleida"
+
+  - id: gentilicio
+    seccion: El pueblo
+    etiqueta: Gentilicio y apodos
+    pregunta: ¿Cómo se llama a la gente de allí?
+    ayuda: El gentilicio y también los apodos cariñosos que os ponen los pueblos de al lado.
+    tipo: texto
+
+  - id: lugares
+    seccion: El pueblo
+    etiqueta: Lugares
+    pregunta: ¿Qué lugares no pueden faltar en la canción?
+    ayuda: La plaza, la iglesia, el río, la ermita, la fuente, el bar de siempre, las piscinas, el mirador…
+    tipo: parrafo
+
+  - id: fiestas
+    seccion: El pueblo
+    etiqueta: Fiestas y tradiciones
+    pregunta: ¿Cuáles son vuestras fiestas y tradiciones?
+    ayuda: Fechas, patrón o patrona, verbenas, carrozas, romerías, toros, la cena popular…
+    tipo: parrafo
+
+  - id: comida
+    seccion: El pueblo
+    etiqueta: Comida y bebida
+    pregunta: ¿Qué se come y se bebe que sea típico?
+    tipo: parrafo
+
+  - id: gente
+    seccion: El pueblo
+    etiqueta: Personajes y anécdotas
+    pregunta: ¿Hay personajes, historias o anécdotas que todo el mundo conozca?
+    ayuda: Solo cosas cariñosas que no molesten a nadie. Mejor apodos que nombres y apellidos.
+    tipo: parrafo
+
+  - id: expresiones
+    seccion: El pueblo
+    etiqueta: Expresiones típicas
+    pregunta: ¿Hay palabras o frases que solo se digan allí?
+    tipo: parrafo
+
+  - id: orgullo
+    seccion: El pueblo
+    etiqueta: Lo que lo hace especial
+    pregunta: En una frase, ¿qué hace especial a tu pueblo?
+    tipo: parrafo
+
+  # ── La música ──
+  - id: idioma
+    seccion: La música
+    etiqueta: Idioma
+    pregunta: ¿En qué idioma quieres la letra?
+    tipo: opciones
+    obligatoria: true
+    opciones:
+      - { valor: Castellano, estilo: "Spanish lyrics" }
+      - { valor: Català, estilo: "Catalan lyrics" }
+      - { valor: Valencià, estilo: "Valencian lyrics" }
+      - { valor: Galego, estilo: "Galician lyrics" }
+      - { valor: Euskara, estilo: "Basque lyrics" }
+      - { valor: Mezcla de idiomas, estilo: "bilingual lyrics" }
+
+  - id: estilo
+    seccion: La música
+    etiqueta: Estilo musical
+    pregunta: ¿Qué estilo te imaginas?
+    ayuda: Puedes elegir más de uno.
+    tipo: multiple
+    obligatoria: true
+    opciones:
+      - { valor: Verbena / pachanga, estilo: "Spanish verbena, pachanga, festive brass, accordion" }
+      - { valor: Rumba, estilo: "Spanish rumba, flamenco guitars, handclaps" }
+      - { valor: Pop, estilo: "Spanish pop, bright production" }
+      - { valor: Rock, estilo: "Spanish rock, electric guitars, driving drums" }
+      - { valor: Folk tradicional, estilo: "Spanish folk, traditional instruments" }
+      - { valor: Jota, estilo: "Spanish jota, bandurria, castanets" }
+      - { valor: Sevillanas, estilo: "sevillanas, flamenco guitar, palmas" }
+      - { valor: Reguetón / urbano, estilo: "reggaeton, latin urban, dembow beat" }
+      - { valor: Rap, estilo: "Spanish hip hop" }
+      - { valor: Cumbia, estilo: "cumbia, latin percussion" }
+      - { valor: Himno con banda, estilo: "anthem, brass marching band" }
+      - { valor: Balada emotiva, estilo: "emotional ballad, piano, strings" }
+      - Sorpréndeme
+
+  - id: referencias
+    seccion: La música
+    etiqueta: Referencias
+    pregunta: ¿Alguna canción o artista que te guste como referencia?
+    tipo: texto
+    placeholder: "Ej.: Georgie Dann, Estopa, Buhos, Rosalía…"
+
+  - id: ambiente
+    seccion: La música
+    etiqueta: Sensación
+    pregunta: ¿Qué tiene que transmitir la canción?
+    ayuda: Puedes elegir más de una.
+    tipo: multiple
+    opciones:
+      - { valor: Fiesta y ganas de bailar, estilo: "energetic, joyful, party" }
+      - { valor: Orgullo de pueblo, estilo: "proud, anthemic" }
+      - { valor: Nostalgia, estilo: "nostalgic, heartfelt" }
+      - { valor: Humor, estilo: "humorous, playful" }
+      - { valor: Emoción, estilo: "emotional, uplifting" }
+
+  - id: voz
+    seccion: La música
+    etiqueta: Voz
+    pregunta: ¿Qué voz prefieres?
+    tipo: opciones
+    opciones:
+      - { valor: Masculina, estilo: "male vocals" }
+      - { valor: Femenina, estilo: "female vocals" }
+      - { valor: Dúo, estilo: "male and female duet" }
+      - { valor: Coro de pueblo, estilo: "group vocals, crowd chants" }
+      - Me da igual
+
+  - id: estribillo
+    seccion: La música
+    etiqueta: Imprescindible en el estribillo
+    pregunta: ¿Hay algo que tenga que sonar sí o sí en el estribillo?
+    ayuda: Un grito de fiestas, un lema, el nombre del pueblo repetido…
+    tipo: parrafo
+
+  - id: evitar
+    seccion: La música
+    etiqueta: Evitar
+    pregunta: ¿Algo que prefieras que NO salga?
+    tipo: parrafo
+
+  # ── Para terminar ──
+  - id: nombre
+    seccion: Para terminar
+    etiqueta: Nombre
+    pregunta: ¿Cómo te llamas?
+    tipo: texto
+    autocompletar: name
+
+  - id: contacto
+    seccion: Para terminar
+    etiqueta: Contacto
+    pregunta: ¿Un email o teléfono para enviarte la canción?
+    tipo: texto
+    autocompletar: email
+
+  - id: extra
+    seccion: Para terminar
+    etiqueta: Otros detalles
+    pregunta: ¿Algo más que quieras contarnos?
+    tipo: parrafo
+
+# ─── Prompts para la IA (solo se ven en /cuestionario/?creador) ──────
+# {id} se sustituye por la respuesta. Si una línea tiene algún {id} sin
+# responder, esa línea se quita.
+prompt_estilo_extra: "catchy sing-along chorus, high quality production"
+
+prompt_letra: |
+  Escribe la letra de una canción original sobre el pueblo de {pueblo}.
+  Está en {provincia}.
+  Motivo de la canción: {motivo}.
+  Peña o asociación: {pena_nombre}.
+  Es un regalo para: {regalo_para}.
+  Idioma de la letra: {idioma}.
+  Estilo musical: {estilo}.
+  Referencias: {referencias}.
+  Tiene que transmitir: {ambiente}.
+  Voz: {voz}.
+
+  Detalles que deben aparecer:
+  - Gentilicio y apodos: {gentilicio}
+  - Lugares: {lugares}
+  - Fiestas y tradiciones: {fiestas}
+  - Comida y bebida: {comida}
+  - Personajes y anécdotas: {gente}
+  - Expresiones locales: {expresiones}
+  - Lo que lo hace especial: {orgullo}
+  - Imprescindible en el estribillo: {estribillo}
+  - Evitar: {evitar}
+  - Otros detalles: {extra}
+
+  Usa etiquetas de estructura: [Intro], [Verse 1], [Pre-Chorus], [Chorus], [Verse 2], [Chorus], [Bridge], [Final Chorus], [Outro].
+  El estribillo debe ser corto, pegadizo, fácil de cantar en grupo y repetir «{pueblo}».
+  Rimas naturales, nada que pueda molestar a nadie del pueblo y sin apellidos de personas reales.

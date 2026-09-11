@@ -1,0 +1,6 @@
+{%- if site.adsense_client and site.adsense_client != "" -%}
+<div class="anuncio">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="{{ site.adsense_client }}" data-ad-slot="{{ site.adsense_slot }}" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+{%- endif -%}

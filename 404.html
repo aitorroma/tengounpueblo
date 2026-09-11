@@ -1,0 +1,32 @@
+---
+layout: default
+title: Pueblo no encontrado
+permalink: /404.html
+sitemap: false
+---
+<section class="pagina estrecho" style="text-align:center">
+  <img src="{{ '/assets/img/icono.png' | relative_url }}" width="140" height="140" alt="">
+  <h1 id="titulo-404">Este pueblo aún no está en el mapa</h1>
+  <p class="entradilla">Puede que todavía no tenga canción… ¡pero puede tenerla!</p>
+  <div class="acciones" style="justify-content:center">
+    <a class="btn" href="{{ '/encarga/' | relative_url }}">Encarga su canción</a>
+    <a class="btn btn-borde" href="{{ '/' | relative_url }}#mapa">Ver el mapa</a>
+  </div>
+</section>
+<script>
+  // Si alguien escribe tengounpueblo.com/Alfarràs o /ALFARRAS, lo llevamos a la ficha correcta.
+  addEventListener('DOMContentLoaded', function () {
+    var tup = window.TengoUnPueblo;
+    var slug = decodeURIComponent(location.pathname.replace(/^\/+|\/+$/g, '').split('/').pop() || '');
+    if (!tup || !slug) return;
+    var buscado = tup.normalizar(slug);
+    tup.cargarPueblos().then(function (pueblos) {
+      var p = pueblos.find(function (p) {
+        return tup.normalizar(p.nombre) === buscado || tup.normalizar(p.url) === buscado;
+      });
+      if (p) return location.replace(p.url);
+      var nombre = slug.replace(/[-_]+/g, ' ');
+      document.getElementById('titulo-404').textContent = nombre.charAt(0).toUpperCase() + nombre.slice(1) + ' aún no está en el mapa';
+    });
+  });
+</script>

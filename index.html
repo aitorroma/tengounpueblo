@@ -1,0 +1,38 @@
+---
+layout: default
+mapa: true
+---
+<section class="hero">
+  <img class="hero-logo" src="{{ '/assets/img/logo.png' | relative_url }}" width="640" height="515" alt="{{ site.title }} · {{ site.tagline }}">
+  <h1>Cada pueblo tiene <span>su canción</span></h1>
+  <p>Busca el tuyo en el mapa y escúchala en Spotify.</p>
+  <div class="buscador">
+    <input id="buscar" type="search" placeholder="Busca tu pueblo…" aria-label="Busca tu pueblo" aria-controls="sugerencias" autocomplete="off">
+    <ul id="sugerencias" class="sugerencias" hidden></ul>
+  </div>
+</section>
+
+<section class="mapa-seccion" id="mapa">
+  <div class="mapa" id="mapa-principal" aria-label="Mapa de pueblos"></div>
+</section>
+
+<section class="seccion contenedor" id="pueblos">
+  <h2>Todos los pueblos <small>{{ site.pueblos.size }}</small></h2>
+  <ul class="rejilla">
+    {%- assign pueblos = site.pueblos | sort_natural: "title" %}
+    {%- for p in pueblos %}
+    <li>
+      <a class="tarjeta" href="{{ p.url | relative_url }}">
+        <strong>{{ p.title }}</strong>
+        <span>{{ p.provincia }}</span>
+        {%- unless p.spotify and p.spotify != "" %}<em class="etiqueta">Próximamente</em>{% endunless %}
+        {%- if p.patrocinador.nombre and p.patrocinador.nombre != "" %}<em class="etiqueta etiqueta-patrocinio">Con {{ p.patrocinador.nombre }}</em>{% endif %}
+      </a>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
+
+<div class="contenedor">
+  {% include cta.html %}
+</div>

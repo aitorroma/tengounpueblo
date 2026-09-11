@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'es' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+{%- if page.layout == "pueblo" %}
+  {%- assign cancion = page.cancion | default: "" %}
+  {%- capture titulo %}{% if cancion != "" %}{{ cancion }} · {% endif %}Canción de {{ page.title }}{% if page.provincia %} ({{ page.provincia }}){% endif %} · {{ site.title }}{% endcapture %}
+  {%- capture descripcion %}{% if page.description and page.description != "" %}{{ page.description }}{% else %}Escucha {% if cancion != "" %}«{{ cancion }}», {% endif %}la canción de {{ page.title }}{% if page.provincia %}, {{ page.provincia }}{% endif %}. {{ site.tagline }}.{% endif %}{% endcapture %}
+{%- elsif page.url == "/" %}
+  {%- capture titulo %}{{ site.title }} · {{ site.tagline }}{% endcapture %}
+  {%- assign descripcion = site.description %}
+{%- else %}
+  {%- capture titulo %}{{ page.title }} · {{ site.title }}{% endcapture %}
+  {%- assign descripcion = page.description | default: site.description %}
+{%- endif %}
+{%- assign imagen = page.portada | default: "/assets/img/og.png" %}
+  <title>{{ titulo | strip }}</title>
+  <meta name="description" content="{{ descripcion | strip | escape }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:type" content="{% if page.layout == 'pueblo' %}music.song{% else %}website{% endif %}">
+  <meta property="og:title" content="{{ titulo | strip | escape }}">
+  <meta property="og:description" content="{{ descripcion | strip | escape }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:image" content="{{ imagen | absolute_url }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#516740">
+  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}" sizes="any">
+  <link rel="icon" type="image/png" href="{{ '/assets/img/icono.png' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/assets/img/apple-touch-icon.png' | relative_url }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700&display=swap">
+{%- if page.mapa %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.min.css">
+{%- endif %}
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+{%- if site.adsense_client and site.adsense_client != "" %}
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ site.adsense_client }}" crossorigin="anonymous"></script>
+{%- endif %}
+{%- if site.goatcounter and site.goatcounter != "" %}
+  <script data-goatcounter="https://{{ site.goatcounter }}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+{%- endif %}
+</head>
+<body data-pueblos="{{ '/pueblos.json' | relative_url }}">
+  {% include cabecera.html %}
+  <main>
+    {{ content }}
+  </main>
+  {% include pie.html %}
+{%- if page.mapa %}
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.min.js"></script>
+{%- endif %}
+  <script defer src="{{ '/assets/js/tengounpueblo.js' | relative_url }}"></script>
+</body>
+</html>

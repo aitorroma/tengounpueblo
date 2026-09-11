@@ -1,0 +1,48 @@
+# ─── Sitio ────────────────────────────────────────────────────────────
+title: Tengo un pueblo
+tagline: Canciones de pueblos
+description: Cada pueblo tiene su canción. Busca el tuyo en el mapa y escúchala en Spotify.
+url: "https://tengounpueblo.com"
+baseurl: ""
+lang: es
+
+# ─── Redes y plataformas (deja "" lo que no uses) ─────────────────────
+artista: Tengo un pueblo
+spotify_artista: ""   # https://open.spotify.com/artist/...
+youtube_canal: ""     # https://www.youtube.com/@...
+instagram: ""         # https://www.instagram.com/...
+tiktok: ""            # https://www.tiktok.com/@...
+email: hola@tengounpueblo.com
+email_patrocinios: aitor@nimbox360.com   # adónde llegan las peticiones de /patrocina/
+whatsapp: ""          # solo números con prefijo, p. ej. 34600111222
+precio_desde: ""      # p. ej. "49 €" (se muestra en /encarga/)
+formspree: ""         # id de formspree.io (p. ej. xyzabcd) para recibir el cuestionario por email sin que el cliente abra su correo
+
+# ─── Monetización y analítica ─────────────────────────────────────────
+precio_patrocinio: "50 €"       # lo que paga un negocio por patrocinar la canción de un pueblo
+patrocinio_duracion: "1 año"    # cuánto tiempo sale su marca en la ficha
+adsense_client: ""    # ca-pub-1234567890123456  (activa anuncios y ads.txt)
+adsense_slot: ""      # id del bloque de anuncio
+goatcounter: ""       # código de goatcounter.com (analítica gratis y sin cookies)
+
+# ─── Jekyll (no hace falta tocar) ─────────────────────────────────────
+collections:
+  pueblos:
+    output: true
+    permalink: /:name/
+
+defaults:
+  - scope: { path: "", type: pueblos }
+    values: { layout: pueblo, mapa: true }
+
+plugins:
+  - jekyll-sitemap
+
+markdown: kramdown
+exclude:
+  - README.md
+  - nuevo_pueblo.py
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .bundle

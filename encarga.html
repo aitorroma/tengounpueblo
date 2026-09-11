@@ -1,0 +1,40 @@
+---
+layout: default
+title: Encarga la canción de tu pueblo
+description: Canciones originales para tu pueblo, tus fiestas, tu peña o tu asociación. Listas para sonar en las fiestas y en Spotify.
+permalink: /encarga/
+---
+<section class="pagina estrecho">
+  <p class="antetitulo">Canciones a medida</p>
+  <h1>La canción de tu pueblo, tus fiestas o tu peña</h1>
+  <p class="entradilla">Creamos una canción original con los nombres, rincones y tradiciones que hacen único a tu pueblo. Lista para sonar en las fiestas, en el grupo de WhatsApp y en Spotify.</p>
+
+  <h2>Perfecta para</h2>
+  <ul class="lista-check">
+    <li>Fiestas mayores y patronales</li>
+    <li>Peñas, comparsas y asociaciones</li>
+    <li>Ayuntamientos y promoción turística</li>
+    <li>Regalar a quien echa de menos su pueblo</li>
+  </ul>
+
+  <h2>Cómo funciona</h2>
+  <ol class="pasos">
+    <li><strong>Nos cuentas</strong>Respondes unas preguntas sobre lugares, fiestas, personajes y el estilo que te gusta.</li>
+    <li><strong>La creamos</strong>Te enviamos una primera versión y la ajustamos contigo.</li>
+    <li><strong>A sonar</strong>Recibes el audio y la publicamos en el mapa y en Spotify.</li>
+  </ol>
+
+  {%- if site.precio_desde != "" %}
+  <p class="precio">Desde <strong>{{ site.precio_desde }}</strong></p>
+  {%- endif %}
+
+  <div class="acciones">
+    <a class="btn" href="{{ '/cuestionario/' | relative_url }}">Empezar el cuestionario</a>
+    <a class="btn btn-borde" href="mailto:{{ site.email }}?subject=Canci%C3%B3n%20para%20mi%20pueblo">Escríbenos</a>
+    {%- if site.whatsapp != "" %}
+    <a class="btn btn-whatsapp" href="https://wa.me/{{ site.whatsapp }}?text=Hola%2C%20quiero%20una%20canci%C3%B3n%20para%20mi%20pueblo" target="_blank" rel="noopener">WhatsApp</a>
+    {%- endif %}
+  </div>
+
+  <p>¿Tienes un negocio? <a href="{{ '/patrocina/' | relative_url }}">Patrocina la canción de tu pueblo por {{ site.precio_patrocinio }}</a>.</p>
+</section>

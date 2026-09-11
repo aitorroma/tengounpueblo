@@ -1,0 +1,14 @@
+<footer class="pie">
+  <div class="contenedor">
+    <p>© {{ site.time | date: "%Y" }} {{ site.title }} · Canciones creadas con ayuda de inteligencia artificial.</p>
+    <nav aria-label="Enlaces">
+      {%- if site.spotify_artista != "" %}<a href="{{ site.spotify_artista }}" rel="noopener" target="_blank">Spotify</a>{% endif %}
+      {%- if site.youtube_canal != "" %}<a href="{{ site.youtube_canal }}" rel="noopener" target="_blank">YouTube</a>{% endif %}
+      {%- if site.instagram != "" %}<a href="{{ site.instagram }}" rel="noopener" target="_blank">Instagram</a>{% endif %}
+      {%- if site.tiktok != "" %}<a href="{{ site.tiktok }}" rel="noopener" target="_blank">TikTok</a>{% endif %}
+      <a href="{{ '/encarga/' | relative_url }}">Encarga tu canción</a>
+      <a href="{{ '/patrocina/' | relative_url }}">Patrocina</a>
+      <a href="{{ '/privacidad/' | relative_url }}">Privacidad</a>
+    </nav>
+  </div>
+</footer>

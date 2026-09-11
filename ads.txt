@@ -1,0 +1,5 @@
+---
+layout: null
+sitemap: false
+---
+{% if site.adsense_client and site.adsense_client != "" %}google.com, {{ site.adsense_client | remove_first: "ca-" }}, DIRECT, f08c47fec0942fa0{% endif %}

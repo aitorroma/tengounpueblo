@@ -1,0 +1,9 @@
+---
+layout: null
+sitemap: false
+---
+[
+{%- for p in site.pueblos %}
+  {"nombre": {{ p.title | jsonify }}, "provincia": {{ p.provincia | jsonify }}, "url": {{ p.url | relative_url | jsonify }}, "lat": {{ p.lat | jsonify }}, "lng": {{ p.lng | jsonify }}, "cancion": {% if p.spotify and p.spotify != "" %}true{% else %}false{% endif %}, "patrocinador": {% if p.patrocinador.nombre and p.patrocinador.nombre != "" %}{{ p.patrocinador.nombre | jsonify }}{% else %}null{% endif %}}{% unless forloop.last %},{% endunless %}
+{%- endfor %}
+]

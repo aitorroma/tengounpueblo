@@ -1,0 +1,9 @@
+{%- comment -%} Acepta youtube.com/watch?v=ID, youtu.be/ID y youtube.com/shorts/ID {%- endcomment -%}
+{%- if include.url contains "v=" -%}
+  {%- assign id = include.url | split: "v=" | last | split: "&" | first -%}
+{%- else -%}
+  {%- assign id = include.url | split: "?" | first | split: "/" | last -%}
+{%- endif -%}
+<div class="video">
+  <iframe src="https://www.youtube-nocookie.com/embed/{{ id }}" title="Vídeo en YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+</div>
