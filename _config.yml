@@ -27,6 +27,9 @@ adsense_slot: ""      # id del bloque de anuncio
 goatcounter: ""       # código de goatcounter.com (analítica gratis y sin cookies)
 
 # ─── Jekyll (no hace falta tocar) ─────────────────────────────────────
+future: true
+timezone: Europe/Madrid
+
 collections:
   pueblos:
     output: true
