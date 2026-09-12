@@ -14,7 +14,7 @@ apple_music: ""
 amazon_music: ""
 
 date: 2026-09-13
-description: "Móra traïdora, una cançó dedicada a Móra d'Ebre, la seva gent, els seus llocs i les seves tradicions."
+description: "Móra traïdora, una canción dedicada a Móra d'Ebre, su gente, sus lugares y sus tradiciones."
 portada: ""
 
 letra: |
@@ -176,4 +176,4 @@ letra: |
   Amb la granera.
 ---
 
-Móra d'Ebre és la capital de la comarca de la Ribera d'Ebre, a Tarragona, situada a la vora del riu Ebre.
+Móra d'Ebre es la capital de la comarca de la Ribera d'Ebre, en Tarragona, situada a orillas del río Ebro.
