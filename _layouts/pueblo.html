@@ -33,11 +33,12 @@ layout: default
   .menu-plataformas .plataforma-icono .icono{width:26px;height:26px}
   .menu-plataformas .spotify{color:#1ed760;background:#e8fbef}
   .menu-plataformas .youtube{color:#e62117;background:#fff0ef}
-  .menu-plataformas .amazon{background:#20d3ee;color:#111;font-size:.62rem;line-height:.9;text-align:center;font-weight:800;padding:4px}
-  .menu-plataformas .amazon span{display:block}
+  .menu-plataformas .amazon{background:#e9fbfd}
+  .menu-plataformas .amazon .icono{width:30px;height:30px}
   .menu-plataformas .flecha{margin-left:auto;font-size:1.45rem;line-height:1;color:var(--suave)}
   .barra-escucha{overflow:visible!important}
   .patrocina-entre-acciones{margin:22px 0}
+  .compartir .btn .icono{width:20px;height:20px;flex:0 0 20px}
   @media(max-width:640px){.plataformas-desplegable{width:min(100%,360px)}.menu-plataformas{position:static;margin-top:10px}.compartir{justify-content:center}}
 </style>
 
@@ -82,7 +83,7 @@ layout: default
           <div class="menu-plataformas">
             {%- if tiene_spotify %}<a href="{{ page.spotify }}" target="_blank" rel="noopener"><span class="plataforma-icono spotify">{% include icono.html nombre="spotify" %}</span><span>Escuchar en Spotify</span><span class="flecha" aria-hidden="true">›</span></a>{% endif -%}
             {%- if tiene_youtube %}<a href="{{ page.youtube }}" target="_blank" rel="noopener"><span class="plataforma-icono youtube">{% include icono.html nombre="youtube" %}</span><span>Ver en YouTube</span><span class="flecha" aria-hidden="true">›</span></a>{% endif -%}
-            {%- if tiene_amazon %}<a href="{{ page.amazon_music }}" target="_blank" rel="noopener"><span class="plataforma-icono amazon"><span>amazon</span><span>music⌣</span></span><span>Escuchar en Amazon Music</span><span class="flecha" aria-hidden="true">›</span></a>{% endif -%}
+            {%- if tiene_amazon %}<a href="{{ page.amazon_music }}" target="_blank" rel="noopener"><span class="plataforma-icono amazon">{% include icono.html nombre="amazon" %}</span><span>Escuchar en Amazon Music</span><span class="flecha" aria-hidden="true">›</span></a>{% endif -%}
             {%- if tiene_apple %}<a href="{{ page.apple_music }}" target="_blank" rel="noopener"><span class="plataforma-icono">♪</span><span>Escuchar en Apple Music</span><span class="flecha" aria-hidden="true">›</span></a>{% endif -%}
           </div>
         </details>
@@ -90,7 +91,10 @@ layout: default
 
         <section class="tarjeta-lateral patrocina-tarjeta patrocina-entre-acciones"><p class="patrocina-precio">{{ site.precio_patrocinio }} por anuncio · {{ site.patrocinio_duracion }}</p><h2>¿Tienes un negocio en {{ page.title }}?</h2><p>{% if n_anunciantes > 0 %}Súmate a los negocios que ya se anuncian en esta canción{% else %}Pon tu anuncio en la página de {% if tiene_spotify %}esta canción{% else %}la canción de {{ page.title }}{% endif %}{% endif %}: tu logo, tu nombre y un enlace a tu web.</p><a class="btn" href="{{ '/patrocina/' | relative_url }}?pueblo={{ page.title | url_encode }}">Anúnciate aquí</a></section>
 
-        <div class="compartir" data-texto="Escucha la canción de {{ page.title }} 🎶"><a class="btn btn-peq btn-whatsapp" data-compartir="whatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a><details class="mas-compartir"><summary class="btn btn-peq btn-borde">Compartir</summary><div class="menu-compartir"><a data-compartir="facebook" href="#" target="_blank" rel="noopener">Facebook</a><a data-compartir="x" href="#" target="_blank" rel="noopener">X (Twitter)</a><a data-compartir="copiar" href="#">Copiar enlace</a></div></details></div>
+        <div class="compartir" data-texto="Escucha la canción de {{ page.title }} 🎶">
+          <a class="btn btn-peq btn-whatsapp" data-compartir="whatsapp" href="#" target="_blank" rel="noopener">{% include icono.html nombre="whatsapp" %}WhatsApp</a>
+          <details class="mas-compartir"><summary class="btn btn-peq btn-borde">{% include icono.html nombre="share" %}Compartir</summary><div class="menu-compartir"><a data-compartir="facebook" href="#" target="_blank" rel="noopener">Facebook</a><a data-compartir="x" href="#" target="_blank" rel="noopener">X (Twitter)</a><a data-compartir="copiar" href="#">Copiar enlace</a></div></details>
+        </div>
       </div>
 
       {% include anuncio.html %}
