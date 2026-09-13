@@ -9,7 +9,7 @@ lng: 0.6382
 
 # Enlaces
 spotify: "https://open.spotify.com/track/16tXIXdVlQBuZkAi2MdFkX?si=YwKgAywjQsm3fJXiOz5pgA&utm_source=copy-link"
-youtube: ""
+youtube: "https://youtu.be/ur7pr9duHKk"
 apple_music: ""
 amazon_music: ""
 
