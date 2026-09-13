@@ -5,6 +5,10 @@ layout: default
 {%- if page.spotify and page.spotify != "" -%}{%- assign tiene_spotify = true -%}{%- endif -%}
 {%- assign tiene_youtube = false -%}
 {%- if page.youtube and page.youtube != "" -%}{%- assign tiene_youtube = true -%}{%- endif -%}
+{%- assign tiene_amazon = false -%}
+{%- if page.amazon_music and page.amazon_music != "" -%}{%- assign tiene_amazon = true -%}{%- endif -%}
+{%- assign tiene_apple = false -%}
+{%- if page.apple_music and page.apple_music != "" -%}{%- assign tiene_apple = true -%}{%- endif -%}
 {%- assign n_anunciantes = 0 -%}
 {%- if page.patrocinadores.first.nombre -%}{%- assign n_anunciantes = page.patrocinadores.size -%}{%- endif -%}
 {%- capture nl %}
@@ -12,13 +16,29 @@ layout: default
 {%- assign separador = nl | append: nl -%}
 {%- assign texto = content | strip -%}
 {%- assign meses = "ene.,feb.,mar.,abr.,may.,jun.,jul.,ago.,sept.,oct.,nov.,dic." | split: "," -%}
-{%- capture plataformas -%}
-  {%- if tiene_spotify %}<a class="btn btn-spotify" href="{{ page.spotify }}" target="_blank" rel="noopener">{% include icono.html nombre="spotify" %}Escuchar en Spotify</a>{% endif -%}
-  {%- if tiene_youtube %}<a class="btn btn-youtube" href="{{ page.youtube }}" target="_blank" rel="noopener">{% include icono.html nombre="youtube" %}Ver en YouTube</a>{% endif -%}
-  {%- if page.apple_music and page.apple_music != "" %}<a class="btn btn-oscuro" href="{{ page.apple_music }}" target="_blank" rel="noopener">Apple Music</a>{% endif -%}
-  {%- if page.amazon_music and page.amazon_music != "" %}<a class="btn btn-oscuro" href="{{ page.amazon_music }}" target="_blank" rel="noopener">Amazon Music</a>{% endif -%}
-{%- endcapture -%}
-{%- assign plataformas = plataformas | strip -%}
+{%- assign tiene_plataformas = false -%}
+{%- if tiene_spotify or tiene_youtube or tiene_amazon or tiene_apple -%}{%- assign tiene_plataformas = true -%}{%- endif -%}
+
+<style>
+  .plataformas-desplegable{position:relative;width:min(100%,440px);margin:0 auto}
+  .plataformas-desplegable>summary{list-style:none;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:13px 22px;border:0;border-radius:999px;background:var(--verde-osc);color:#fff;font:700 1rem var(--cuerpo);cursor:pointer;box-shadow:var(--sombra)}
+  .plataformas-desplegable>summary::-webkit-details-marker{display:none}
+  .plataformas-desplegable .chevron{width:10px;height:10px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-top:-4px;transition:transform .18s}
+  .plataformas-desplegable[open] .chevron{transform:rotate(225deg);margin-top:5px}
+  .menu-plataformas{position:absolute;left:0;right:0;top:calc(100% + 10px);z-index:40;padding:10px;background:#fff;border:1px solid var(--borde);border-radius:20px;box-shadow:0 14px 38px rgba(59,77,46,.18)}
+  .menu-plataformas a{display:flex;align-items:center;gap:13px;padding:12px 14px;color:var(--texto);text-decoration:none;font-weight:700;border-radius:14px}
+  .menu-plataformas a+a{border-top:1px solid var(--borde);border-top-left-radius:0;border-top-right-radius:0}
+  .menu-plataformas a:hover{background:var(--arena)}
+  .menu-plataformas .plataforma-icono{display:grid;place-items:center;flex:0 0 42px;width:42px;height:42px;border-radius:50%;background:#f8f8f8}
+  .menu-plataformas .plataforma-icono .icono{width:26px;height:26px}
+  .menu-plataformas .spotify{color:#1ed760;background:#e8fbef}
+  .menu-plataformas .youtube{color:#e62117;background:#fff0ef}
+  .menu-plataformas .amazon{background:#20d3ee;color:#111;font-size:.62rem;line-height:.9;text-align:center;font-weight:800;padding:4px}
+  .menu-plataformas .amazon span{display:block}
+  .menu-plataformas .flecha{margin-left:auto;font-size:1.45rem;line-height:1;color:var(--suave)}
+  .barra-escucha{overflow:visible!important}
+  @media(max-width:640px){.plataformas-desplegable{width:min(100%,360px)}.menu-plataformas{position:static;margin-top:10px}.compartir{justify-content:center}}
+</style>
 
 <article class="pueblo">
   <header class="pueblo-hero">
@@ -30,9 +50,7 @@ layout: default
       </nav>
       <p class="antetitulo">La canción de</p>
       <h1>{{ page.title }}</h1>
-      {%- if page.cancion and page.cancion != "" %}
-      <p class="titulo-cancion">«{{ page.cancion }}»</p>
-      {%- endif %}
+      {%- if page.cancion and page.cancion != "" %}<p class="titulo-cancion">«{{ page.cancion }}»</p>{%- endif %}
       <ul class="chips">
         {%- if page.comarca and page.comarca != "" %}<li>{{ page.comarca }}</li>{% endif %}
         {%- if page.provincia and page.provincia != "" %}<li>{{ page.provincia }}</li>{% endif %}
@@ -56,7 +74,20 @@ layout: default
       <aside class="anunciantes"><span class="patrocinio-etiqueta">Con el apoyo de</span><ul class="anunciantes-lista" data-por-vista="{{ site.anuncios_por_vista | default: 0 }}">{%- for pat in page.patrocinadores %}{%- if pat.nombre and pat.nombre != "" %}<li>{%- if pat.url and pat.url != "" %}<a class="patrocinio-marca" href="{{ pat.url }}" target="_blank" rel="sponsored noopener">{% else %}<div class="patrocinio-marca">{% endif %}{%- if pat.logo and pat.logo != "" %}<img src="{{ pat.logo | relative_url }}" width="44" height="44" alt="" loading="lazy">{% endif %}<span><strong>{{ pat.nombre }}</strong>{% if pat.texto and pat.texto != "" %}<small>{{ pat.texto }}</small>{% endif %}</span>{%- if pat.url and pat.url != "" %}</a>{% else %}</div>{% endif %}</li>{%- endif %}{%- endfor %}</ul></aside>
       {%- endif %}
 
-      <div class="barra-escucha{% if plataformas == '' %} solo-compartir{% endif %}">{%- if plataformas != "" %}<div class="plataformas">{{ plataformas }}</div>{%- endif %}<div class="compartir" data-texto="Escucha la canción de {{ page.title }} 🎶"><a class="btn btn-peq btn-whatsapp" data-compartir="whatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a><details class="mas-compartir"><summary class="btn btn-peq btn-borde">Compartir</summary><div class="menu-compartir"><a data-compartir="facebook" href="#" target="_blank" rel="noopener">Facebook</a><a data-compartir="x" href="#" target="_blank" rel="noopener">X (Twitter)</a><a data-compartir="copiar" href="#">Copiar enlace</a></div></details></div></div>
+      <div class="barra-escucha{% unless tiene_plataformas %} solo-compartir{% endunless %}">
+        {%- if tiene_plataformas %}
+        <details class="plataformas-desplegable">
+          <summary><span aria-hidden="true">🎧</span> Escúchala en <span class="chevron" aria-hidden="true"></span></summary>
+          <div class="menu-plataformas">
+            {%- if tiene_spotify %}<a href="{{ page.spotify }}" target="_blank" rel="noopener"><span class="plataforma-icono spotify">{% include icono.html nombre="spotify" %}</span><span>Escuchar en Spotify</span><span class="flecha" aria-hidden="true">›</span></a>{% endif -%}
+            {%- if tiene_youtube %}<a href="{{ page.youtube }}" target="_blank" rel="noopener"><span class="plataforma-icono youtube">{% include icono.html nombre="youtube" %}</span><span>Ver en YouTube</span><span class="flecha" aria-hidden="true">›</span></a>{% endif -%}
+            {%- if tiene_amazon %}<a href="{{ page.amazon_music }}" target="_blank" rel="noopener"><span class="plataforma-icono amazon"><span>amazon</span><span>music⌣</span></span><span>Escuchar en Amazon Music</span><span class="flecha" aria-hidden="true">›</span></a>{% endif -%}
+            {%- if tiene_apple %}<a href="{{ page.apple_music }}" target="_blank" rel="noopener"><span class="plataforma-icono">♪</span><span>Escuchar en Apple Music</span><span class="flecha" aria-hidden="true">›</span></a>{% endif -%}
+          </div>
+        </details>
+        {%- endif %}
+        <div class="compartir" data-texto="Escucha la canción de {{ page.title }} 🎶"><a class="btn btn-peq btn-whatsapp" data-compartir="whatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a><details class="mas-compartir"><summary class="btn btn-peq btn-borde">Compartir</summary><div class="menu-compartir"><a data-compartir="facebook" href="#" target="_blank" rel="noopener">Facebook</a><a data-compartir="x" href="#" target="_blank" rel="noopener">X (Twitter)</a><a data-compartir="copiar" href="#">Copiar enlace</a></div></details></div>
+      </div>
 
       {% include anuncio.html %}
 
@@ -75,10 +106,10 @@ layout: default
           {%- if page.comarca and page.comarca != "" %}<div><dt>Comarca</dt><dd>{{ page.comarca }}</dd></div>{% endif %}
           {%- if page.provincia and page.provincia != "" %}<div><dt>Provincia</dt><dd>{{ page.provincia }}</dd></div>{% endif %}
           {%- if page.comunidad and page.comunidad != "" %}<div><dt>Comunidad</dt><dd>{{ page.comunidad }}</dd></div>{% endif %}
-          {%- if tiene_spotify or tiene_youtube or page.amazon_music and page.amazon_music != "" %}<div><dt>Escúchala en</dt><dd class="datos-plataformas">
+          {%- if tiene_plataformas %}<div><dt>Escúchala en</dt><dd class="datos-plataformas">
             {%- if tiene_spotify %}<a class="icono-plataforma icono-spotify" href="{{ page.spotify }}" target="_blank" rel="noopener" aria-label="Escuchar en Spotify" title="Spotify">{% include icono.html nombre="spotify" %}</a>{% endif %}
             {%- if tiene_youtube %}<a class="icono-plataforma icono-youtube" href="{{ page.youtube }}" target="_blank" rel="noopener" aria-label="Ver en YouTube" title="YouTube">{% include icono.html nombre="youtube" %}</a>{% endif %}
-            {%- if page.amazon_music and page.amazon_music != "" %}<a class="icono-plataforma icono-amazon" href="{{ page.amazon_music }}" target="_blank" rel="noopener" aria-label="Escuchar en Amazon Music" title="Amazon Music">{% include icono.html nombre="amazon" %}</a>{% endif %}
+            {%- if tiene_amazon %}<a class="icono-plataforma icono-amazon" href="{{ page.amazon_music }}" target="_blank" rel="noopener" aria-label="Escuchar en Amazon Music" title="Amazon Music">{% include icono.html nombre="amazon" %}</a>{% endif %}
           </dd></div>{%- endif %}
           {%- if tiene_spotify and page.date %}{%- assign mes = page.date | date: "%-m" | minus: 1 %}<div><dt>Publicada</dt><dd><time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%-d" }} {{ meses[mes] }} {{ page.date | date: "%Y" }}</time></dd></div>{%- else %}<div><dt>Canción</dt><dd>{% if tiene_spotify %}Disponible{% else %}En composición{% endif %}</dd></div>{%- endif %}
         </dl></section>
