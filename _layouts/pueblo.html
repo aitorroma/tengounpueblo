@@ -37,6 +37,7 @@ layout: default
   .menu-plataformas .amazon span{display:block}
   .menu-plataformas .flecha{margin-left:auto;font-size:1.45rem;line-height:1;color:var(--suave)}
   .barra-escucha{overflow:visible!important}
+  .patrocina-entre-acciones{margin:22px 0}
   @media(max-width:640px){.plataformas-desplegable{width:min(100%,360px)}.menu-plataformas{position:static;margin-top:10px}.compartir{justify-content:center}}
 </style>
 
@@ -86,6 +87,9 @@ layout: default
           </div>
         </details>
         {%- endif %}
+
+        <section class="tarjeta-lateral patrocina-tarjeta patrocina-entre-acciones"><p class="patrocina-precio">{{ site.precio_patrocinio }} por anuncio · {{ site.patrocinio_duracion }}</p><h2>¿Tienes un negocio en {{ page.title }}?</h2><p>{% if n_anunciantes > 0 %}Súmate a los negocios que ya se anuncian en esta canción{% else %}Pon tu anuncio en la página de {% if tiene_spotify %}esta canción{% else %}la canción de {{ page.title }}{% endif %}{% endif %}: tu logo, tu nombre y un enlace a tu web.</p><a class="btn" href="{{ '/patrocina/' | relative_url }}?pueblo={{ page.title | url_encode }}">Anúnciate aquí</a></section>
+
         <div class="compartir" data-texto="Escucha la canción de {{ page.title }} 🎶"><a class="btn btn-peq btn-whatsapp" data-compartir="whatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a><details class="mas-compartir"><summary class="btn btn-peq btn-borde">Compartir</summary><div class="menu-compartir"><a data-compartir="facebook" href="#" target="_blank" rel="noopener">Facebook</a><a data-compartir="x" href="#" target="_blank" rel="noopener">X (Twitter)</a><a data-compartir="copiar" href="#">Copiar enlace</a></div></details></div>
       </div>
 
@@ -113,8 +117,6 @@ layout: default
           </dd></div>{%- endif %}
           {%- if tiene_spotify and page.date %}{%- assign mes = page.date | date: "%-m" | minus: 1 %}<div><dt>Publicada</dt><dd><time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%-d" }} {{ meses[mes] }} {{ page.date | date: "%Y" }}</time></dd></div>{%- else %}<div><dt>Canción</dt><dd>{% if tiene_spotify %}Disponible{% else %}En composición{% endif %}</dd></div>{%- endif %}
         </dl></section>
-
-      <section class="tarjeta-lateral patrocina-tarjeta"><p class="patrocina-precio">{{ site.precio_patrocinio }} por anuncio · {{ site.patrocinio_duracion }}</p><h2>¿Tienes un negocio en {{ page.title }}?</h2><p>{% if n_anunciantes > 0 %}Súmate a los negocios que ya se anuncian en esta canción{% else %}Pon tu anuncio en la página de {% if tiene_spotify %}esta canción{% else %}la canción de {{ page.title }}{% endif %}{% endif %}: tu logo, tu nombre y un enlace a tu web.</p><a class="btn" href="{{ '/patrocina/' | relative_url }}?pueblo={{ page.title | url_encode }}">Anúnciate aquí</a></section>
 
       {%- if page.lat and page.lng %}<section class="tarjeta-lateral" hidden><h2>Pueblos cercanos</h2><ul class="lista-cercanos" id="cercanos" data-lat="{{ page.lat }}" data-lng="{{ page.lng }}" data-url="{{ page.url | relative_url }}"></ul></section>{%- endif %}
       {% include anuncio.html %}
