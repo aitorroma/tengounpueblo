@@ -11,7 +11,7 @@ lng: 0.6382
 spotify: "https://open.spotify.com/track/16tXIXdVlQBuZkAi2MdFkX?si=YwKgAywjQsm3fJXiOz5pgA&utm_source=copy-link"
 youtube: "https://youtu.be/ur7pr9duHKk"
 apple_music: ""
-amazon_music: ""
+amazon_music: "https://www.amazon.es/music/player/albums/B0HJN2GSPW?marketplaceId=A1RKKUPIHCS9HS&musicTerritory=ES&ref=dm_sh_6tLsKolyKJY52WkBaIYCgAcPY"
 
 date: 2026-09-13
 description: "Móra traïdora, una canción dedicada a Móra d'Ebre, su gente, sus lugares y sus tradiciones."
