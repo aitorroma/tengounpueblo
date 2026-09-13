@@ -11,7 +11,7 @@ lng: 0.57034
 spotify: "https://open.spotify.com/intl-es/track/2bgK5SU2kePMvCGzcaZk4G?si=0559694a46e348d7"
 youtube: "https://www.youtube.com/watch?v=thsnXrKjLgg"
 apple_music: ""
-amazon_music: ""
+amazon_music: "https://amazon.es/music/player/albums/B0HJF6N28Y?marketplaceId=A1RKKUPIHCS9HS&musicTerritory=ES&ref=dm_sh_4uEEkIUqzSsaZRJPXKAlJtWqK"
 
 # Anunciantes (opcional, puede haber varios): quita los # para activarlo
 # patrocinadores:
