@@ -10,7 +10,7 @@ lng: -3.20
 spotify: "https://open.spotify.com/track/2N9oCDNZExYommCASnwxgo?si=p32nBkmkR5iSUXYQyGzqbA&utm_source=copy-link"
 youtube: "https://youtu.be/lE12eMEIbm4?si=GqKQgluR4vDZfKi6"
 apple_music: ""
-amazon_music: ""
+amazon_music: "https://music.amazon.es/tracks/B0HKJGXX7V?marketplaceId=A1RKKUPIHCS9HS&musicTerritory=ES&ref=dm_sh_GiN2fsZACHQZCMthwlcKdgQRm"
 
 date: 2026-09-21
 description: "Quédate un rato más, una canción dedicada a La Alpujarra, sus pueblos, sus montañas y esa forma de vivir donde el tiempo parece ir más despacio."
