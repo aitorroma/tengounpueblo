@@ -10,7 +10,7 @@ lng: 0.566
 spotify: "https://open.spotify.com/track/4pr3YVWOBLAEChASmuMXYm?si=VxT0zgFEQAuHoD5T12QwAA&utm_source=copy-link"
 youtube: "https://youtu.be/yVeiZLVrHpQ"
 apple_music: ""
-amazon_music: ""
+amazon_music: "https://music.amazon.es/tracks/B0HKGZJP47?marketplaceId=A1RKKUPIHCS9HS&musicTerritory=ES&ref=dm_sh_LVgXeFGog9HLWuBsyW4BPAciV"
 
 date: 2026-09-21
 description: "Són els meus records, una canción dedicada a Andaní, sus recuerdos, sus lugares y sus tradiciones."
