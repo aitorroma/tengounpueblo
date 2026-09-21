@@ -10,7 +10,7 @@ lng: -4.0496454
 spotify: ""
 youtube: "https://youtu.be/MKVkT37_mFQ"
 apple_music: ""
-amazon_music: ""
+amazon_music: "https://music.amazon.es/tracks/B0HKGXHHNG?marketplaceId=A1RKKUPIHCS9HS&musicTerritory=ES&ref=dm_sh_TYBLZQTXrkkqmpc0jo5xbb9QE"
 
 date: 2026-09-21
 description: "Soy de Hinojedo, una canción dedicada a Hinojedo, sus paisajes, sus tradiciones y su gente."
