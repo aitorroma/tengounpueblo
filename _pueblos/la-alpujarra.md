@@ -8,7 +8,7 @@ lat: 36.96
 lng: -3.20
 
 spotify: "https://open.spotify.com/track/2N9oCDNZExYommCASnwxgo?si=p32nBkmkR5iSUXYQyGzqbA&utm_source=copy-link"
-youtube: ""
+youtube: "https://youtu.be/lE12eMEIbm4?si=GqKQgluR4vDZfKi6"
 apple_music: ""
 amazon_music: ""
 
