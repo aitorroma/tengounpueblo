@@ -48,10 +48,41 @@ letra: |
   ropa al sol aprendiendo a perdonar,
   y los nombres se pronuncian despacito
   como si doliera menos recordar.
-  Las veredas saben cosas de la ausencia,
-  de los pasos que se fueron hacia el mar,
-  pero siempre queda abierta alguna puerta
-  por si un día te apetece regresar.
+  Las veredas saben cosas de la gente,
+  de los que aman y se tienen que marchar,
+  de los que vuelven siempre un poco rotos
+  y se arreglan viendo el cielo anaranjado.
+
+  [Pre-estribillo 2]
+  Yo no traía respuestas en la mochila,
+  solo ganas de quedarme a respirar,
+  y entendí que no hace falta ir tan lejos
+  si lo lejos te lo enseña este lugar.
+
+  [Estribillo]
+  Quédate un rato más,
+  donde el tiempo se queda,
+  donde el alma se sienta
+  a mirarse sin juzgar.
+  Quédate un rato más,
+  que aquí todo es sencillo,
+  y hasta el miedo es más chico
+  si se aprende a escuchar.
+
+  [Puente]
+  Si algún día no sé dónde volver,
+  si la ciudad me vuelve a hacer ruido,
+  buscaré este silencio otra vez,
+  la Alpujarra guardándome el sitio.
+
+  [Último estribillo (más suave)]
+  Quédate un rato más,
+  aunque sea en recuerdo,
+  aunque sea en canciones
+  que no quieren acabar.
+  Quédate un rato más…
+  que hay lugares que curan
+  sin prometerte nada más.
 ---
 
 La Alpujarra es una comarca histórica de Andalucía situada en las laderas meridionales de Sierra Nevada y repartida entre las provincias de Granada y Almería.
