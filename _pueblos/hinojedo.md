@@ -7,7 +7,7 @@ comunidad: "Cantabria"
 lat: 43.396927
 lng: -4.0496454
 
-spotify: ""
+spotify: "https://open.spotify.com/track/7ffFa1SwvB5TQ13CwBuonC?si=aYAQfB9lSCmonxhjabQbtQ&utm_source=copy-link"
 youtube: "https://youtu.be/MKVkT37_mFQ"
 apple_music: ""
 amazon_music: "https://music.amazon.es/tracks/B0HKGXHHNG?marketplaceId=A1RKKUPIHCS9HS&musicTerritory=ES&ref=dm_sh_TYBLZQTXrkkqmpc0jo5xbb9QE"
